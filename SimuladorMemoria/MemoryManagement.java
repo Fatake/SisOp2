@@ -5,28 +5,21 @@ import java.awt.*;
 import java.io.*;
 import java.util.*;
 /*
-import ControlPanel;
-import PageFault;
-import Virtual2Physical;
-import Common;
-import Page;
-*/
-
+ * Clase manejo de memoria
+ */
 public class MemoryManagement {
   public static void main(final String[] args) {
     ControlPanel controlPanel;
     Kernel kernel;
 
-    if ( args.length < 1 || args.length > 2 ) 
-    {
+    if ( args.length < 1 || args.length > 2 ) {
       System.out.println( "Usage: 'java MemoryManagement <COMMAND FILE> <PROPERTIES FILE>'" );
       System.exit( -1 );
     } 
 
     File f = new File( args[0] );
 
-    if ( ! ( f.exists() ) ) 
-    {
+    if ( ! ( f.exists() ) ) { //Checa si existe el archivo
       System.out.println( "MemoryM: error, file '" + f.getName() + "' does not exist." );
       System.exit( -1 );
     }

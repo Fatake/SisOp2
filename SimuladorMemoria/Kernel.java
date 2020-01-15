@@ -478,7 +478,7 @@ public class Kernel extends Thread
     for ( i = 0; i < virtPageNum; i++ ) 
     {
       Page page = ( Page ) memVector.elementAt( i );
-      if ( page.R == 1 && page.lastTouchTime == 10 ) 
+      if ( page.R == 1 && page.lastTouchTime == 1000 ) 
       {
         page.R = 0;
       }
