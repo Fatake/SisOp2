@@ -1,3 +1,6 @@
+/*
+ * Intrucciones?
+ */
 public class Instruction {
   public String inst;
   public long addr;

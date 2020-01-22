@@ -1,7 +1,6 @@
 public class Common {
 
-  static public long s2l ( String s ) 
-  {
+  static public long s2l ( String s ) {
     long i = 0;
 
     try {

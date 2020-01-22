@@ -2,22 +2,22 @@ import java.lang.Thread;
 import java.io.*;
 import java.util.*;
 
-//import Page;
-
+/*
+ * Clase Kernel uso de Hilos
+ */
 public class Kernel extends Thread
 {
   // The number of virtual pages must be fixed at 63 due to
   // dependencies in the GUI
-  private static int virtPageNum = 63;
+  private static int virtPageNum = 63;//N pagias
 
   private String output = null;
-  private static final String lineSeparator = 
-    System.getProperty("line.separator");
-  private String command_file;
-  private String config_file;
-  private ControlPanel controlPanel ;
-  private Vector memVector = new Vector();
-  private Vector instructVector = new Vector();
+  private static final String lineSeparator = System.getProperty("line.separator");
+  private String command_file;//Archivo command
+  private String config_file;//Configuracion de Archivo
+  private ControlPanel controlPanel ;//Panel visual
+  private Vector memVector = new Vector();//?
+  private Vector instructVector = new Vector();//??
   private String status;
   private boolean doStdoutLog = false;
   private boolean doFileLog = false;
@@ -26,9 +26,8 @@ public class Kernel extends Thread
   public long block = (int) Math.pow(2,12);
   public static byte addressradix = 10;
 
-  public void init( String commands , String config )  
-  {
-    File f = new File( commands );
+  public void init( String commands , String config )  {
+    File f = new File( commands );//abre el archivo Comandos
     command_file = commands;
     config_file = config;
     String line;
@@ -50,8 +49,7 @@ public class Kernel extends Thread
     long addr = 0;
     long address_limit = (block * virtPageNum+1)-1;
   
-    if ( config != null )
-    {
+    if ( config != null ){
       f = new File ( config );
       try 
       {
@@ -478,7 +476,7 @@ public class Kernel extends Thread
     for ( i = 0; i < virtPageNum; i++ ) 
     {
       Page page = ( Page ) memVector.elementAt( i );
-      if ( page.R == 1 && page.lastTouchTime == 1000 ) 
+      if ( page.R == 1 && page.lastTouchTime == 250  ) 
       {
         page.R = 0;
       }

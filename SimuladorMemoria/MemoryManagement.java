@@ -12,8 +12,8 @@ public class MemoryManagement {
     ControlPanel controlPanel;
     Kernel kernel;
 
-    if ( args.length < 1 || args.length > 2 ) {
-      System.out.println( "Usage: 'java MemoryManagement <COMMAND FILE> <PROPERTIES FILE>'" );
+    if ( args.length < 1 || args.length > 2 ) { //lee argumentos
+      System.out.println( "Uso: 'java MemoryManagement <COMMAND FILE> <PROPERTIES FILE>'" );
       System.exit( -1 );
     } 
 

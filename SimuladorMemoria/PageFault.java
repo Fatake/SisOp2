@@ -1,7 +1,8 @@
-/* It is in this file, specifically the replacePage function that will
-   be called by MemoryManagement when there is a page fault.  The 
-   users of this program should rewrite PageFault to implement the 
-   page replacement algorithm.
+/* 
+    Está en este archivo, específicamente la función replacePage
+    a la que llamará MemoryManagement cuando haya un error de página.
+    Los usuarios de este programa deben reescribir PageFault para 
+    implementar el algoritmo de reemplazo de página.
 */
 
   // This PageFault file is an example of the FIFO Page Replacement 
@@ -9,47 +10,55 @@
 
 import java.util.*;
 
-//import Page;
 
-public class PageFault {
-
+public class PageFault {//Algoritmo de Reemplazo de pagina 
   /**
-   * The page replacement algorithm for the memory management sumulator.
-   * This method gets called whenever a page needs to be replaced.
-   * <p>
-   * The page replacement algorithm included with the simulator is 
-   * FIFO (first-in first-out).  A while or for loop should be used 
-   * to search through the current memory contents for a canidate 
-   * replacement page.  In the case of FIFO the while loop is used 
-   * to find the proper page while making sure that virtPageNum is 
-   * not exceeded.
-   * <pre>
-   *   Page page = ( Page ) mem.elementAt( oldestPage )
-   * </pre>
-   * This line brings the contents of the Page at oldestPage (a 
-   * specified integer) from the mem vector into the page object.  
-   * Next recall the contents of the target page, replacePageNum.  
-   * Set the physical memory address of the page to be added equal 
-   * to the page to be removed.
-   * <pre>
-   *   controlPanel.removePhysicalPage( oldestPage )
-   * </pre>
-   * Once a page is removed from memory it must also be reflected 
-   * graphically.  This line does so by removing the physical page 
-   * at the oldestPage value.  The page which will be added into 
-   * memory must also be displayed through the addPhysicalPage 
-   * function call.  One must also remember to reset the values of 
-   * the page which has just been removed from memory.
-   *
-   * @param mem is the vector which contains the contents of the pages 
-   *   in memory being simulated.  mem should be searched to find the 
-   *   proper page to remove, and modified to reflect any changes.  
-   * @param virtPageNum is the number of virtual pages in the 
-   *   simulator (set in Kernel.java).  
-   * @param replacePageNum is the requested page which caused the 
-   *   page fault.  
-   * @param controlPanel represents the graphical element of the 
-   *   simulator, and allows one to modify the current display.
+    * Se llama a este método cada vez que
+    * se necesita reemplazar una página.
+    * <p>
+    * 
+    * El algoritmo de reemplazo de página incluido
+    * con el simulador es FIFO (primero en entrar, primero en salir).
+    * Se debe usar un bucle while o for para buscar en los
+    * contenidos de la memoria actual una página de reemplazo de candidato.
+    * En el caso de FIFO, el bucle while se usa para encontrar
+    * la página adecuada y al mismo tiempo asegurarse
+    * de que no se excede virtPageNum.
+    * <pre>
+    *   Página de la página = (Página) mem.elementAt (más antiguaPágina)
+    * </pre>
+    * 
+    * Esta línea trae el contenido de la página en la página
+    * más antigua (un entero especificado) del vector mem al objeto de la página.
+    * A continuación, recupere el contenido de la página de destino,
+    * reemplace PageNum.
+    * Establezca la dirección de memoria física de la página
+    * que se agregará igual a la página que se eliminará.
+    * <pre>
+    *   controlPanel.removePhysicalPage (más antiguoPágina)
+    * </pre>
+    * 
+    * Una vez que una página se elimina de la memoria,
+    * también debe reflejarse gráficamente. Esta línea lo hace eliminando
+    * la página física en el valor de página más antiguo.
+    * La página que se agregará a la memoria también debe mostrarse a través de
+    * la llamada a la función addPhysicalPage.
+    * También se debe recordar restablecer los valores
+    * de la página que acaba de eliminarse de la memoria.
+    * 
+    * @param mem es el vector que contiene el contenido
+    * de las páginas en la memoria que se simula. Se debe buscar en
+    * mem para encontrar la página adecuada 
+    * para eliminar y modificar para reflejar cualquier cambio.
+    *   
+    * @param virtPageNum es el número de páginas
+    * virtuales en el simulador (establecido en Kernel.java).
+    *   
+    * @param replacePageNum es la página
+    * solicitada que causó la falla de la página.
+    * 
+    * @param controlPanel representa el elemento
+    * gráfico del simulador y permite modificar la visualización actual.
    */
   public static void replacePage ( Vector mem , int virtPageNum , int replacePageNum , ControlPanel controlPanel ) 
   {
@@ -60,7 +69,7 @@ public class PageFault {
     int map_count = 0;
     boolean mapped = false;
 
-    while ( ! (mapped) || count != virtPageNum ) {
+    while ( ! (mapped) || count != virtPageNum ) {//Algoritmo FIFO
       Page page = ( Page ) mem.elementAt( count );
       if ( page.physical != -1 ) {
         if (firstPage == -1) {

@@ -4,8 +4,8 @@
 public class Page {
   public int id;
   public int physical;
-  public byte R;
-  public byte M;
+  public byte R;//Si le READ
+  public byte M;//Si se Write
   public int inMemTime;
   public int lastTouchTime;
   public long high;
