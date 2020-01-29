@@ -1,26 +1,23 @@
 package nru;
 import java.util.Random;
 /*
- ALGORITMO DE REEMPLAZO NRU
-Este algoritmo se guía con los bits de referencia 
-y modificacion.
-Entrada;N
-Salida: 
-Inicio---
-*Todas la paginas no estan referenciadas ni modificadas
-*Se elige una pagina de acuerdo a un tiempo X (Utilizar Random)
-*Se accede a la pagina
-*Se modifica a 1 el bit de referencia o el de modificación 
-*El SO apaga todos los bits de referencia para saber cuales han sido ocupados
-*Se vuelve a hacer uso del avantum de tiempo para solicitar una nueva pagina
-*En caso de que la pagina no esté presente provocara un fallo de pagina (page fault)
-*Se aplica el algoritmo NRU utilizandi las 4 categorias
-*Se desaloja una página de la categoría más baja 
-(una buena opción son las páginas que estan ubicadas en la categoria 0)
+ * ALGORITMO DE REEMPLAZO NRU
+ * Este algoritmo se guía con los bits de referencia 
+ * y modificacion.
+ * Entrada;N
+ * Salida: 
+ * Inicio---
+ * Todas la paginas no estan referenciadas ni modificadas
+ * Se elige una pagina de acuerdo a un tiempo X (Utilizar Random)
+ * Se accede a la pagina
+ * Se modifica a 1 el bit de referencia o el de modificación 
+ * El SO apaga todos los bits de referencia para saber cuales han sido ocupados
+ * Se vuelve a hacer uso del avantum de tiempo para solicitar una nueva pagina
+ * En caso de que la pagina no esté presente provocara un fallo de pagina (page fault)
+ * Se aplica el algoritmo NRU utilizandi las 4 categorias
+ * Se desaloja una página de la categoría más baja 
+ * (una buena opción son las páginas que estan ubicadas en la categoria 0)
  */
-
-
-
 public class NRU {
 
     /**

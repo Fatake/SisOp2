@@ -44,8 +44,17 @@ public class Kernel extends Thread
     int lastTouchTime = 0;
     int map_count = 0;
     double power = 14;
-    long high = 0;
-    long low = 0;
+    // Variables de Segmento
+    long high = 0;//Alto
+    long low = 0;//Bajo
+    long segmento1 = block*5;
+    long segmento2 = block*8;
+    long segmento3 = block*6;
+    long segmento4 = block*9;
+    long segmento5 = block*4;
+    int limSup;
+    int limInf;
+
     long addr = 0;
     long address_limit = (block * virtPageNum+1)-1;
   
@@ -63,8 +72,7 @@ public class Kernel extends Thread
             {
               tmp = st.nextToken();
               virtPageNum = Common.s2i(st.nextToken()) - 1;
-              if ( virtPageNum < 2 || virtPageNum > 63 )
-              {
+              if ( virtPageNum < 2 || virtPageNum > 63 ){
                 System.out.println("MemoryManagement: numpages out of bounds.");
                 System.exit(-1);
               }
@@ -74,8 +82,7 @@ public class Kernel extends Thread
         }
         in.close();
       } catch (IOException e) { /* Handle exceptions */ }
-      for (i = 0; i <= virtPageNum; i++) 
-      {
+      for (i = 0; i <= virtPageNum; i++) {
         high = (block * (i + 1))-1;
         low = block * i;
         memVector.addElement(new Page(i, -1, R, M, 0, 0, high, low));

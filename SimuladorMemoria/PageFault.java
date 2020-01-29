@@ -60,8 +60,7 @@ public class PageFault {//Algoritmo de Reemplazo de pagina
     * @param controlPanel representa el elemento
     * gráfico del simulador y permite modificar la visualización actual.
    */
-  public static void replacePage ( Vector mem , int virtPageNum , int replacePageNum , ControlPanel controlPanel ) 
-  {
+  public static void replacePage ( Vector mem , int virtPageNum , int replacePageNum , ControlPanel controlPanel ) {
     int count = 0;
     int oldestPage = -1;
     int oldestTime = 0;
