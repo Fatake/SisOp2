@@ -61,13 +61,63 @@ public class PageFault {//Algoritmo de Reemplazo de pagina
     * gráfico del simulador y permite modificar la visualización actual.
    */
   public static void replacePage ( Vector mem , int virtPageNum , int replacePageNum , ControlPanel controlPanel ) {
+    /* NRU algoritmo */
+    int numeroPaginas = mem.size();//Cantidad de paginas
+    int oldestPage = 0 ;
+    boolean eliminada = false;
+    
+    for (int i=0; i<numeroPaginas ;i++){//Para cada pagina
+      /*
+        busca una pagina segun el algoritmo
+        que cumpla con la tabla de prioridades de abajo
+
+        R   M
+        0   0  mas prioridad
+        0   1
+        1   0
+        1   1  menos prioridad
+      */
+      Page pagina = (Page) mem.get(i);
+      
+      if( pagina.R == 0 && pagina.M == 0){//Prioridad mas alta
+        oldestPage = i;
+        break;
+      }
+      if( pagina.R == 0 && pagina.M == 1){
+        oldestPage = i;
+        break;
+      }
+      if( pagina.R == 1 && pagina.M == 0){
+        oldestPage = i;
+        break;
+      }
+      if( pagina.R == 1 && pagina.M == 1){//Prioridad mas Baja
+        oldestPage = i;
+        break;
+      }
+    }
+
+    Page page = ( Page ) mem.elementAt( oldestPage );//Obtiene la pagiana antigua
+    Page nextpage = ( Page ) mem.elementAt( replacePageNum );
+
+    controlPanel.removePhysicalPage( oldestPage );
+    nextpage.physical = page.physical;
+
+    controlPanel.addPhysicalPage( nextpage.physical , replacePageNum );
+    page.inMemTime = 0;
+    page.lastTouchTime = 0;
+    page.R = 0;
+    page.M = 0;
+    page.physical = -1;
+  }
+  /*
+   //  Fifo   // 
     int count = 0;
     int oldestPage = -1;
     int oldestTime = 0;
     int firstPage = -1;
     int map_count = 0;
     boolean mapped = false;
-
     while ( ! (mapped) || count != virtPageNum ) {//Algoritmo FIFO
       Page page = ( Page ) mem.elementAt( count );
       if ( page.physical != -1 ) {
@@ -88,15 +138,5 @@ public class PageFault {//Algoritmo de Reemplazo de pagina
     if (oldestPage == -1) {
       oldestPage = firstPage;
     }
-    Page page = ( Page ) mem.elementAt( oldestPage );
-    Page nextpage = ( Page ) mem.elementAt( replacePageNum );
-    controlPanel.removePhysicalPage( oldestPage );
-    nextpage.physical = page.physical;
-    controlPanel.addPhysicalPage( nextpage.physical , replacePageNum );
-    page.inMemTime = 0;
-    page.lastTouchTime = 0;
-    page.R = 0;
-    page.M = 0;
-    page.physical = -1;
-  }
+  */
 }
