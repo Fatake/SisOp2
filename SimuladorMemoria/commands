@@ -1,20 +1,17 @@
-// Configuracion de lecutra
-// y escritura de la memoria
-// Solo accepta comandos READ/WRITE 
-// READ <Tipo: bin/hex/oct>  <Direccion virtual | random>
+// Enter READ/WRITE commands into this file
+// READ <OPTIONAL number type: bin/hex/oct> <virtual memory address or random>
 // WRITE <OPTIONAL number type: bin/hex/oct> <virtual memory address or random>
-
-// 0     mem 0
-// 4000  mem 1
-// 8000  mem 2
-// c000  mem 3
-// 10000 mem 4
-// 14000 mem 5
-// 18000 mem 6
-// 1c000 mem 7
-// 20000 mem 8
-// 24000 mem 9
-
-
-READ hex 0000
-
+//READ bin 100
+//READ 19
+//WRITE hex CC32
+//READ bin 100000000000000
+//READ bin 100000000000000
+//WRITE bin 110000000000001
+/WRITE random
+READ hex 0000 c000
+READ hex 0000 7bfff
+READ hex 1c000 27fff
+READ hex 40000 47fff
+READ hex 60000 67fff
+READ hex 70000 7bfff
+//WRITE hex 80000 8c000

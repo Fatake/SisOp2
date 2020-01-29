@@ -1,34 +1,44 @@
 import java.lang.Thread;
 import java.io.*;
 import java.util.*;
+//import Page;
 
-/*
- * Clase Kernel uso de Hilos
- */
+import javax.swing.JOptionPane;
+
 public class Kernel extends Thread
 {
   // The number of virtual pages must be fixed at 63 due to
   // dependencies in the GUI
-  private static int virtPageNum = 63;//N pagias
+  private static int virtPageNum = 63;
 
   private String output = null;
-  private static final String lineSeparator = System.getProperty("line.separator");
-  private String command_file;//Archivo command
-  private String config_file;//Configuracion de Archivo
-  private ControlPanel controlPanel ;//Panel visual
-  private Vector memVector = new Vector();//?
-  private Vector instructVector = new Vector();//??
-  private String status;
+  private static final String lineSeparator = 
+    System.getProperty("line.separator");
+  private String command_file;
+  private String config_file;
+  private ControlPanel controlPanel ;
+  static private Vector memVector = new Vector();
+  static private Vector instructVector = new Vector();
+  static private String status;
   private boolean doStdoutLog = false;
   private boolean doFileLog = false;
   public int runs;
   public int runcycles;
-  public long block = (int) Math.pow(2,12);
+  static public long block = (int) Math.pow(2,12);
+  //public long block1 = (int) Math.pow(2,14);////
   public static byte addressradix = 10;
+  ///
+  static public long seg1 = 114687;//Valor decimal del limite de pagina 0-6
+  static public long seg2=262143;//7-15
+  static public long seg3=393215;//16-23
+  static public long seg4=458751;//24-27 
+  static public long seg5=524287;//28-31
+  //////
 
-  public void init( String commands , String config )  {
-    File f = new File( commands );//abre el archivo Comandos
-    command_file = commands;
+  public void init( String commands , String config )  
+  {
+    File f = new File( commands );
+    command_file = commands; 
     config_file = config;
     String line;
     String tmp = null;
@@ -44,21 +54,15 @@ public class Kernel extends Thread
     int lastTouchTime = 0;
     int map_count = 0;
     double power = 14;
-    // Variables de Segmento
-    long high = 0;//Alto
-    long low = 0;//Bajo
-    long segmento1 = block*5;
-    long segmento2 = block*8;
-    long segmento3 = block*6;
-    long segmento4 = block*9;
-    long segmento5 = block*4;
-    int limSup;
-    int limInf;
-
+    long high = 0;
+    long low = 0;
     long addr = 0;
+    long pagina = 0;
     long address_limit = (block * virtPageNum+1)-1;
   
-    if ( config != null ){
+  
+    if ( config != null )
+    {
       f = new File ( config );
       try 
       {
@@ -72,7 +76,8 @@ public class Kernel extends Thread
             {
               tmp = st.nextToken();
               virtPageNum = Common.s2i(st.nextToken()) - 1;
-              if ( virtPageNum < 2 || virtPageNum > 63 ){
+              if ( virtPageNum < 2 || virtPageNum > 63 )
+              {
                 System.out.println("MemoryManagement: numpages out of bounds.");
                 System.exit(-1);
               }
@@ -82,7 +87,8 @@ public class Kernel extends Thread
         }
         in.close();
       } catch (IOException e) { /* Handle exceptions */ }
-      for (i = 0; i <= virtPageNum; i++) {
+      for (i = 0; i <= virtPageNum; i++) 
+      {
         high = (block * (i + 1))-1;
         low = block * i;
         memVector.addElement(new Page(i, -1, R, M, 0, 0, high, low));
@@ -261,6 +267,80 @@ public class Kernel extends Thread
             else if ( tmp.startsWith( "hex" ) )
             {
               addr = Long.parseLong(st.nextToken(),16);
+              pagina= Long.parseLong(st.nextToken(),16);
+              //int x = Integer.parseInt(addr,16);
+              //int x2 = Integer.parseInt(pagina,16);
+              //JOptionPane.showMessageDialog(null, "Marco1 es puto   "+ addr);
+              //JOptionPane.showMessageDialog(null, "Marco2 es puto   "+ pagina);
+              //JOptionPane.showMessageDialog(null, "Marco3 es puto   "+ seg1);
+              ////
+              if (addr >= 0 && addr <= seg1)
+              {
+                if(pagina <= seg1){
+                JOptionPane.showMessageDialog(null, "S1 " + "Pagina:    "+ pagina/block);
+                instructVector.addElement(new Instruction(command,addr));
+                }
+                else{
+                  JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 1.");
+                }
+              }
+              else {
+                if (addr >= seg1+1 && addr <=seg2)
+                {
+                  if (pagina <= seg2){
+                    JOptionPane.showMessageDialog(null, "S2 " + "Pagina:    "+ pagina/block);
+                  instructVector.addElement(new Instruction(command,addr));
+                }
+                else{
+                  JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 2.");
+                }
+              }
+              else 
+              {
+                if (addr >= seg2+1 && addr <=seg3)
+                {
+                  if (pagina <= seg3){
+                    JOptionPane.showMessageDialog(null, "S3 " + "Pagina:    "+ pagina/block);
+                  instructVector.addElement(new Instruction(command,addr));
+                }
+                else{
+                  JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 3.");
+                }
+              }
+              else
+              {
+                if(addr >= seg3+1 && addr <=seg4)
+                {
+                  if(pagina <= seg4){
+                    JOptionPane.showMessageDialog(null, "S4 " + "Pagina:    "+ pagina/block);
+                  instructVector.addElement(new Instruction(command,addr));
+                }
+                else{
+                  JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 4.");
+                }
+              }
+              else
+              {
+                if (addr >= seg4+1 && addr <=seg5)
+                {
+                  if (pagina <= seg5){
+                    JOptionPane.showMessageDialog(null, "S5 " + "Pagina:    "+ pagina/block);
+                  instructVector.addElement(new Instruction(command,addr));
+                }
+                else{
+                  JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 5.");
+                }
+              }
+                    }
+                  }
+                }
+              }
+              
+              
+              
+              
+              ////
+             
             }
             else
             {
@@ -268,11 +348,20 @@ public class Kernel extends Thread
             }
             if (0 > addr || addr > address_limit)
             {
+          
               System.out.println("MemoryManagement: " + addr + ", Address out of range in " + commands);
               System.exit(-1);
             }
-            instructVector.addElement(new Instruction(command,addr));
-          }
+            //////////////////
+            if (0 > pagina || pagina > address_limit)
+            {
+              System.out.println("MemoryManagement: " + pagina + ", Address out of range in " + commands);
+              System.exit(-1);
+            }
+
+            /////////////////////
+            //instructVector.addElement(new Instruction(command,addr));
+          } 
         }
       }
       in.close();
@@ -483,7 +572,7 @@ public class Kernel extends Thread
     for ( i = 0; i < virtPageNum; i++ ) 
     {
       Page page = ( Page ) memVector.elementAt( i );
-      if ( page.R == 1 && page.lastTouchTime == 250  ) 
+      if ( page.R == 1 && page.lastTouchTime == 10 ) 
       {
         page.R = 0;
       }
