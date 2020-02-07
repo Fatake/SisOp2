@@ -28,11 +28,11 @@ public class Kernel extends Thread
   //public long block1 = (int) Math.pow(2,14);////
   public static byte addressradix = 10;
   ///
-  static public long seg1 = 114687;//Valor decimal del limite de pagina 0-6
-  static public long seg2=262143;//7-15
-  static public long seg3=393215;//16-23
-  static public long seg4=458751;//24-27 
-  static public long seg5=524287;//28-31
+  static public long seg1 = 49151;//Valor decimal del limite de pagina 0-2
+  static public long seg2=147455;//3-8
+  static public long seg3=262143;//9-15
+  static public long seg4=311295;//16-18 
+  static public long seg5=524287;//19-31
   //////
 
   public void init( String commands , String config )  
@@ -572,7 +572,7 @@ public class Kernel extends Thread
     for ( i = 0; i < virtPageNum; i++ ) 
     {
       Page page = ( Page ) memVector.elementAt( i );
-      if ( page.R == 1 && page.lastTouchTime == 10 ) 
+      if ( page.R == 1 && page.lastTouchTime == 250 ) 
       {
         page.R = 0;
       }

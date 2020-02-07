@@ -1,5 +1,7 @@
 import java.applet.*;
 import java.awt.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class ControlPanel extends Frame {
   Kernel kernel ;
@@ -166,7 +168,7 @@ public class ControlPanel extends Frame {
     setLayout( null );
     setBackground( Color.white );
     setForeground( Color.black );
-    resize( 635 , 545 );
+    resize( 700 , 700 );
     setFont( new Font( "Courier", 0, 12 ) );   
 
     runButton.setForeground( Color.blue );
@@ -190,163 +192,163 @@ public class ControlPanel extends Frame {
     add( exitButton );
 
     b0.reshape(0, (0+2)*15+25, 70, 15);
-    b0.setForeground( Color.magenta );
-    b0.setBackground( Color.lightGray );
+    b0.setForeground( Color.black );
+    b0.setBackground( Color.blue );
     add ( b0 );
 
     b1.reshape(0, (1+2)*15+25, 70, 15);
-    b1.setForeground( Color.magenta );
-    b1.setBackground( Color.lightGray );
+    b1.setForeground( Color.black );
+    b1.setBackground( Color.blue );
     add ( b1 );
     
     b2.reshape(0, (2+2)*15+25, 70, 15);
-    b2.setForeground( Color.magenta );
-    b2.setBackground( Color.lightGray );
+    b2.setForeground( Color.black );
+    b2.setBackground( Color.blue );
     add ( b2 );
     
     b3.reshape(0, (3+2)*15+25, 70, 15);
-    b3.setForeground( Color.magenta );
-    b3.setBackground( Color.lightGray );
+    b3.setForeground( Color.black );
+    b3.setBackground( Color.red );
     add ( b3 );
     
     b4.reshape(0, (4+2)*15+25, 70, 15);
-    b4.setForeground( Color.magenta );
-    b4.setBackground( Color.lightGray );
+    b4.setForeground( Color.black );
+    b4.setBackground( Color.red );
     add ( b4 );
     
     b5.reshape(0, (5+2)*15+25, 70, 15);
-    b5.setForeground( Color.magenta );
-    b5.setBackground( Color.lightGray );
+    b5.setForeground( Color.black );
+    b5.setBackground( Color.red );
     add ( b5 );
     
     b6.reshape(0, (6+2)*15+25, 70, 15);
-    b6.setForeground( Color.magenta );
-    b6.setBackground( Color.lightGray );
+    b6.setForeground( Color.black );
+    b6.setBackground( Color.red );
     add ( b6 );
     
     b7.reshape(0, (7+2)*15+25, 70, 15);
-    b7.setForeground( Color.magenta );
-    b7.setBackground( Color.lightGray );
+    b7.setForeground( Color.black );
+    b7.setBackground( Color.red);
     add ( b7 );
     
     b8.reshape(0, (8+2)*15+25, 70, 15);
-    b8.setForeground( Color.magenta );
-    b8.setBackground( Color.lightGray );
+    b8.setForeground( Color.black );
+    b8.setBackground( Color.red );
     add ( b8 );
     
     b9.reshape(0, (9+2)*15+25, 70, 15);
-    b9.setForeground( Color.magenta );
-    b9.setBackground( Color.lightGray );
+    b9.setForeground( Color.black );
+    b9.setBackground( Color.green );
     add ( b9 );
     
     b10.reshape(0, (10+2)*15+25, 70, 15);
-    b10.setForeground( Color.magenta );
-    b10.setBackground( Color.lightGray );
+    b10.setForeground( Color.black );
+    b10.setBackground( Color.green );
     add ( b10 );
     
     b11.reshape(0, (11+2)*15+25, 70, 15);
-    b11.setForeground( Color.magenta );
-    b11.setBackground( Color.lightGray );
+    b11.setForeground( Color.black );
+    b11.setBackground( Color.green );
     add ( b11 );
     
     b12.reshape(0, (12+2)*15+25, 70, 15);
-    b12.setForeground( Color.magenta );
-    b12.setBackground( Color.lightGray );
+    b12.setForeground( Color.black );
+    b12.setBackground( Color.green );
     add ( b12 );
     
     b13.reshape(0, (13+2)*15+25, 70, 15);
-    b13.setForeground( Color.magenta );
-    b13.setBackground( Color.lightGray );
+    b13.setForeground( Color.black );
+    b13.setBackground( Color.green );
     add ( b13 );
     
     b14.reshape(0, (14+2)*15+25, 70, 15);
-    b14.setForeground( Color.magenta );
-    b14.setBackground( Color.lightGray );
+    b14.setForeground( Color.black );
+    b14.setBackground( Color.green );
     add ( b14 );
     
     b15.reshape(0, (15+2)*15+25, 70, 15);
-    b15.setForeground( Color.magenta );
-    b15.setBackground( Color.lightGray );
+    b15.setForeground( Color.black );
+    b15.setBackground( Color.green );
     add ( b15 );
     
     b16.reshape(0, (16+2)*15+25, 70, 15);
-    b16.setForeground( Color.magenta );
-    b16.setBackground( Color.lightGray );
+    b16.setForeground( Color.black );
+    b16.setBackground( Color.yellow );
     add ( b16 );
     
     b17.reshape(0, (17+2)*15+25, 70, 15);
-    b17.setForeground( Color.magenta );
-    b17.setBackground( Color.lightGray );
+    b17.setForeground( Color.black );
+    b17.setBackground( Color.yellow );
     add ( b17 );
     
     b18.reshape(0, (18+2)*15+25, 70, 15);
-    b18.setForeground( Color.magenta );
-    b18.setBackground( Color.lightGray );
+    b18.setForeground( Color.black );
+    b18.setBackground( Color.yellow );
     add ( b18 );
     
     b19.reshape(0, (19+2)*15+25, 70, 15);
-    b19.setForeground( Color.magenta );
-    b19.setBackground( Color.lightGray );
+    b19.setForeground( Color.black );
+    b19.setBackground( Color.magenta );
     add ( b19 );
     
     b20.reshape(0, (20+2)*15+25, 70, 15);
-    b20.setForeground( Color.magenta );
-    b20.setBackground( Color.lightGray );
+    b20.setForeground( Color.black );
+    b20.setBackground( Color.magenta );
     add ( b20 );
     
     b21.reshape(0, (21+2)*15+25, 70, 15);
-    b21.setForeground( Color.magenta );
-    b21.setBackground( Color.lightGray );
+    b21.setForeground( Color.black );
+    b21.setBackground( Color.magenta );
     add ( b21 );
     
     b22.reshape(0, (22+2)*15+25, 70, 15);
-    b22.setForeground( Color.magenta );
-    b22.setBackground( Color.lightGray );
+    b22.setForeground( Color.black );
+    b22.setBackground( Color.magenta );
     add ( b22 );
     
     b23.reshape(0, (23+2)*15+25, 70, 15);
-    b23.setForeground( Color.magenta );
-    b23.setBackground( Color.lightGray );
+    b23.setForeground( Color.black );
+    b23.setBackground( Color.magenta );
     add ( b23 );
     
     b24.reshape(0, (24+2)*15+25, 70, 15);
-    b24.setForeground( Color.magenta );
-    b24.setBackground( Color.lightGray );
+    b24.setForeground( Color.black );
+    b24.setBackground( Color.magenta );
     add ( b24 );
     
     b25.reshape(0, (25+2)*15+25, 70, 15);
-    b25.setForeground( Color.magenta );
-    b25.setBackground( Color.lightGray );
+    b25.setForeground( Color.black );
+    b25.setBackground( Color.magenta );
     add ( b25 );
     
     b26.reshape(0, (26+2)*15+25, 70, 15);
-    b26.setForeground( Color.magenta );
-    b26.setBackground( Color.lightGray );
+    b26.setForeground( Color.black );
+    b26.setBackground( Color.magenta );
     add ( b26 );
     
     b27.reshape(0, (27+2)*15+25, 70, 15);
-    b27.setForeground( Color.magenta );
-    b27.setBackground( Color.lightGray );
+    b27.setForeground( Color.black );
+    b27.setBackground( Color.magenta );
     add ( b27 );
     
     b28.reshape(0, (28+2)*15+25, 70, 15);
-    b28.setForeground( Color.magenta );
-    b28.setBackground( Color.lightGray );
+    b28.setForeground( Color.black );
+    b28.setBackground( Color.magenta ); 
     add ( b28 );
     
     b29.reshape(0, (29+2)*15+25, 70, 15);
-    b29.setForeground( Color.magenta );
-    b29.setBackground( Color.lightGray );
+    b29.setForeground( Color.black );
+    b29.setBackground( Color.magenta );    
     add ( b29 );
     
     b30.reshape(0, (30+2)*15+25, 70, 15);
-    b30.setForeground( Color.magenta );
-    b30.setBackground( Color.lightGray );
+    b30.setForeground( Color.black );
+    b30.setBackground( Color.magenta );
     add ( b30 );
     
     b31.reshape(0, (31+2)*15+25, 70, 15);
-    b31.setForeground( Color.magenta );
-    b31.setBackground( Color.lightGray );
+    b31.setForeground( Color.black );
+    b31.setBackground( Color.magenta ); 
     add ( b31 );
     
     b32.reshape(140, (0+2)*15+25, 70, 15);
@@ -615,6 +617,44 @@ public class ControlPanel extends Frame {
     Label highLabel = new Label("high: " , Label.LEFT) ;
     highLabel.reshape(285,225+25,110,15);
     add(highLabel);
+
+    Label Seg=new Label("SEGMENTOS: 	PAGINAS:", Label.LEFT);
+    Seg.reshape(285,240+25,300,15);
+    add(Seg);
+
+    Label Seg1=new Label("SEGMENTO 1: 0-2", Label.LEFT);
+    Seg1.reshape(285,260+25,200,15);
+    add(Seg1);
+
+    Label Seg2=new Label("SEGMENTO 2: 3-8", Label.LEFT);
+    Seg2.reshape(285,280+25,200,15);
+    add(Seg2);
+
+    Label Seg3=new Label("SEGMENTO 3: 9-15", Label.LEFT);
+    Seg3.reshape(285,300+25,200,15);
+    add(Seg3);
+
+    Label Seg4=new Label("SEGMENTO 4: 16-18", Label.LEFT);
+    Seg4.reshape(285,320+25,200,15);
+    add(Seg4);
+
+    Label Seg5=new Label("SEGMENTO 5: 19-31", Label.LEFT);
+    Seg5.reshape(285,340+25,200,15);
+    add(Seg5);
+
+    DefaultTableModel Modelo = new DefaultTableModel();	
+    Modelo.addColumn("Segmento");
+    Modelo.addColumn("Pagina");
+    Modelo.addColumn("ERROR"); 
+    JTable Tabla=new JTable(Modelo);
+    Tabla.setBounds(285,300+25,200,15);  
+    Tabla.setLocation(285,300);
+    Tabla.setSize(100,100);
+    Tabla.setAutoResizeMode(1);  
+	Tabla.setVisible(true);
+    add(Tabla);
+    
+
 
     l0.reshape( 70, (2)*15+25, 60, 15 );
     l0.setForeground( Color.red );

@@ -1,0 +1,76 @@
+// Solo accepta comandos READ/WRITE 
+// READ <Tipo: bin/hex/oct>  <Direccion virtual | random>
+// WRITE <OPTIONAL number type: bin/hex/oct> <virtual memory address or random>
+
+// 0     mem 0
+// 4000  mem 1
+// 8000  mem 2
+// c000  mem 3
+// 10000 mem 4
+// 14000 mem 5
+// 18000 mem 6
+// 1c000 mem 7
+// 20000 mem 8
+// 24000 mem 9
+
+WRITE hex 0 0
+WRITE hex 0 0
+READ hex 0 0
+
+WRITE hex 4000 4000
+READ hex 4000 4000
+
+WRITE hex 8000 8000
+READ hex 8000 8000
+
+WRITE hex c000 c000
+READ hex c000 c000
+
+WRITE hex 10000 10000
+READ hex 10000 10000
+
+WRITE hex 14000 14000
+READ hex 14000 14000
+
+WRITE hex 18000 18000
+READ hex 18000 18000
+
+WRITE hex 1c000 1c000
+READ hex 1c000 1c000
+
+WRITE hex 20000 20000
+READ hex 20000 20000
+
+WRITE hex 24000 24000
+READ hex 24000 24000
+
+WRITE hex 0 0
+READ hex 0 0
+
+WRITE hex 4000 4000
+READ hex 4000 4000
+
+WRITE hex 8000 8000
+READ hex 8000 8000
+
+WRITE hex c000 c000
+READ hex c000 c000
+
+WRITE hex 10000 10000
+READ hex 10000 10000
+
+WRITE hex 14000 14000
+READ hex 14000 14000
+
+WRITE hex 18000 18000
+READ hex 18000 18000
+
+WRITE hex 1c000 1c000
+READ hex 1c000 1c000
+
+WRITE hex 20000 20000
+READ hex 20000 20000
+
+WRITE hex 24000 24000
+READ hex 24000 24000
+
