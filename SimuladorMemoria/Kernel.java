@@ -1,12 +1,9 @@
 import java.lang.Thread;
 import java.io.*;
 import java.util.*;
-//import Page;
-
 import javax.swing.JOptionPane;
 
-public class Kernel extends Thread
-{
+public class Kernel extends Thread{
   // The number of virtual pages must be fixed at 63 due to
   // dependencies in the GUI
   private static int virtPageNum = 63;
@@ -277,7 +274,7 @@ public class Kernel extends Thread
               if (addr >= 0 && addr <= seg1)
               {
                 if(pagina <= seg1){
-                JOptionPane.showMessageDialog(null, "S1 " + "Pagina:    "+ pagina/block);
+                //JOptionPane.showMessageDialog(null, "S1 " + "Pagina:    "+ pagina/block);
                 instructVector.addElement(new Instruction(command,addr));
                 }
                 else{
@@ -288,8 +285,8 @@ public class Kernel extends Thread
                 if (addr >= seg1+1 && addr <=seg2)
                 {
                   if (pagina <= seg2){
-                    JOptionPane.showMessageDialog(null, "S2 " + "Pagina:    "+ pagina/block);
-                  instructVector.addElement(new Instruction(command,addr));
+                    //JOptionPane.showMessageDialog(null, "S2 " + "Pagina:    "+ pagina/block);
+                    instructVector.addElement(new Instruction(command,addr));
                 }
                 else{
                   JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 2.");
@@ -300,8 +297,8 @@ public class Kernel extends Thread
                 if (addr >= seg2+1 && addr <=seg3)
                 {
                   if (pagina <= seg3){
-                    JOptionPane.showMessageDialog(null, "S3 " + "Pagina:    "+ pagina/block);
-                  instructVector.addElement(new Instruction(command,addr));
+                    //JOptionPane.showMessageDialog(null, "S3 " + "Pagina:    "+ pagina/block);
+                    instructVector.addElement(new Instruction(command,addr));
                 }
                 else{
                   JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 3.");
@@ -312,8 +309,8 @@ public class Kernel extends Thread
                 if(addr >= seg3+1 && addr <=seg4)
                 {
                   if(pagina <= seg4){
-                    JOptionPane.showMessageDialog(null, "S4 " + "Pagina:    "+ pagina/block);
-                  instructVector.addElement(new Instruction(command,addr));
+                    //JOptionPane.showMessageDialog(null, "S4 " + "Pagina:    "+ pagina/block);
+                    instructVector.addElement(new Instruction(command,addr));
                 }
                 else{
                   JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 4.");
@@ -324,8 +321,8 @@ public class Kernel extends Thread
                 if (addr >= seg4+1 && addr <=seg5)
                 {
                   if (pagina <= seg5){
-                    JOptionPane.showMessageDialog(null, "S5 " + "Pagina:    "+ pagina/block);
-                  instructVector.addElement(new Instruction(command,addr));
+                    //JOptionPane.showMessageDialog(null, "S5 " + "Pagina:    "+ pagina/block);
+                    instructVector.addElement(new Instruction(command,addr));
                 }
                 else{
                   JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 5.");
@@ -335,12 +332,6 @@ public class Kernel extends Thread
                   }
                 }
               }
-              
-              
-              
-              
-              ////
-             
             }
             else
             {
