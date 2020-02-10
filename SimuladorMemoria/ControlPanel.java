@@ -2,9 +2,11 @@ import java.applet.*;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.*;
 
 public class ControlPanel extends Frame {
   Kernel kernel ;
+  
   Button runButton = new Button("run");
   Button stepButton = new Button("step");
   Button resetButton = new Button("reset");
@@ -165,6 +167,7 @@ public class ControlPanel extends Frame {
   {
     kernel = useKernel ;
     kernel.setControlPanel( this );
+    kernel.init( commands , config );
     setLayout( null );
     setBackground( Color.white );
     setForeground( Color.black );
@@ -641,20 +644,33 @@ public class ControlPanel extends Frame {
     Label Seg5=new Label("SEGMENTO 5: 19-31", Label.LEFT);
     Seg5.reshape(285,340+25,200,15);
     add(Seg5);
-
-    DefaultTableModel Modelo = new DefaultTableModel();	
-    Modelo.addColumn("Segmento");
-    Modelo.addColumn("Pagina");
-    Modelo.addColumn("ERROR"); 
-    JTable Tabla=new JTable(Modelo);
-    Tabla.setBounds(285,300+25,200,15);  
-    Tabla.setLocation(285,300);
-    Tabla.setSize(100,100);
-    Tabla.setAutoResizeMode(1);  
-	Tabla.setVisible(true);
-    add(Tabla);
+    /*
+	 * 
+	 * 
+	 * ESTO ES LO QUE YO AGREGE
+	 * PARA QUE SE MOSTRARAN LOS RESULTADOS 
+	 * DE SEGMENTACION
+	 * 
+	 * 
+	 * 
+	 */
     
+	
+	String s="";
+	for(int i=0;i<useKernel.Resultados.size();i++)
+		s=s+"\n"+useKernel.Resultados.get(i);
+   
+	JTextArea resultados = new JTextArea(s);
+	resultados.setEditable(false);	
+	resultados.setLineWrap(true);
+	resultados.setBounds(285,360+25,400,400);
+	add(resultados);
 
+
+
+
+
+///////////////////////////
 
     l0.reshape( 70, (2)*15+25, 60, 15 );
     l0.setForeground( Color.red );
@@ -977,7 +993,7 @@ public class ControlPanel extends Frame {
     l63.setFont( new Font( "Courier", 0, 10 ) );   
     add( l63 );
 
-    kernel.init( commands , config );
+    
 
     show();
   }

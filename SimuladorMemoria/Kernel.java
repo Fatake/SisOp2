@@ -7,13 +7,12 @@ public class Kernel extends Thread{
   // The number of virtual pages must be fixed at 63 due to
   // dependencies in the GUI
   private static int virtPageNum = 63;
-
+  public ArrayList<String> Resultados = new ArrayList<String>();//ARRAY PARA INGRESAR LOS RESULTADOS DE SEGMENTACION
   private String output = null;
-  private static final String lineSeparator = 
-    System.getProperty("line.separator");
+  private static final String lineSeparator = System.getProperty("line.separator");
   private String command_file;
   private String config_file;
-  private ControlPanel controlPanel ;
+  public ControlPanel controlPanel ;
   static private Vector memVector = new Vector();
   static private Vector instructVector = new Vector();
   static private String status;
@@ -265,31 +264,30 @@ public class Kernel extends Thread{
             {
               addr = Long.parseLong(st.nextToken(),16);
               pagina= Long.parseLong(st.nextToken(),16);
-              //int x = Integer.parseInt(addr,16);
-              //int x2 = Integer.parseInt(pagina,16);
-              //JOptionPane.showMessageDialog(null, "Marco1 es puto   "+ addr);
-              //JOptionPane.showMessageDialog(null, "Marco2 es puto   "+ pagina);
-              //JOptionPane.showMessageDialog(null, "Marco3 es puto   "+ seg1);
-              ////
+              
               if (addr >= 0 && addr <= seg1)
               {
                 if(pagina <= seg1){
+				this.Resultados.add("S1 " + "P"+ pagina/block);
                 //JOptionPane.showMessageDialog(null, "S1 " + "Pagina:    "+ pagina/block);
                 instructVector.addElement(new Instruction(command,addr));
                 }
                 else{
-                  JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 1.");
+                  this.Resultados.add("Error, la pagina no esta dentro del segmento 1.");
+                  //JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 1.");
                 }
               }
               else {
                 if (addr >= seg1+1 && addr <=seg2)
                 {
                   if (pagina <= seg2){
+                this.Resultados.add("S2 " + "P"+ pagina/block);
                     //JOptionPane.showMessageDialog(null, "S2 " + "Pagina:    "+ pagina/block);
                     instructVector.addElement(new Instruction(command,addr));
                 }
                 else{
-                  JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 2.");
+					this.Resultados.add("Error, la pagina no esta dentro del segmento 2.");
+                //  JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 2.");
                 }
               }
               else 
@@ -297,11 +295,13 @@ public class Kernel extends Thread{
                 if (addr >= seg2+1 && addr <=seg3)
                 {
                   if (pagina <= seg3){
+					  this.Resultados.add("S3 " + "P"+ pagina/block);
                     //JOptionPane.showMessageDialog(null, "S3 " + "Pagina:    "+ pagina/block);
                     instructVector.addElement(new Instruction(command,addr));
                 }
                 else{
-                  JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 3.");
+                  this.Resultados.add("Error, la pagina no esta dentro del segmento 3.");
+                  //JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 3.");
                 }
               }
               else
@@ -309,11 +309,13 @@ public class Kernel extends Thread{
                 if(addr >= seg3+1 && addr <=seg4)
                 {
                   if(pagina <= seg4){
+					  this.Resultados.add("S4 " + "P"+ pagina/block);
                     //JOptionPane.showMessageDialog(null, "S4 " + "Pagina:    "+ pagina/block);
                     instructVector.addElement(new Instruction(command,addr));
                 }
                 else{
-                  JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 4.");
+					this.Resultados.add("Error, la pagina no esta dentro del segmento 4.");
+                  //JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 4.");
                 }
               }
               else
@@ -321,11 +323,13 @@ public class Kernel extends Thread{
                 if (addr >= seg4+1 && addr <=seg5)
                 {
                   if (pagina <= seg5){
+					  this.Resultados.add("S5 " + "P"+ pagina/block);
                     //JOptionPane.showMessageDialog(null, "S5 " + "Pagina:    "+ pagina/block);
                     instructVector.addElement(new Instruction(command,addr));
                 }
                 else{
-                  JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 5.");
+					this.Resultados.add("Error, la pagina no esta dentro del segmento 5.");
+                  //JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 5.");
                 }
               }
                     }
