@@ -6,7 +6,7 @@ import java.util.*;
 
 public class ControlPanel extends Frame {
   Kernel kernel ;
-  
+  JTextArea resultados = new JTextArea();
   Button runButton = new Button("run");
   Button stepButton = new Button("step");
   Button resetButton = new Button("reset");
@@ -656,11 +656,12 @@ public class ControlPanel extends Frame {
 	 */
     
 	
-	String s="";
+	/*String s="";
 	for(int i=0;i<useKernel.Resultados.size();i++)
 		s=s+"\n"+useKernel.Resultados.get(i);
-   
-	JTextArea resultados = new JTextArea(s);
+*/
+	
+	
 	resultados.setEditable(false);	
 	resultados.setLineWrap(true);
 	resultados.setBounds(285,360+25,400,400);

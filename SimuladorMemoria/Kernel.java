@@ -7,6 +7,7 @@ public class Kernel extends Thread{
   // The number of virtual pages must be fixed at 63 due to
   // dependencies in the GUI
   private static int virtPageNum = 63;
+  int cont=0;
   public ArrayList<String> Resultados = new ArrayList<String>();//ARRAY PARA INGRESAR LOS RESULTADOS DE SEGMENTACION
   private String output = null;
   private static final String lineSeparator = System.getProperty("line.separator");
@@ -479,17 +480,19 @@ public class Kernel extends Thread{
   public void run()
   {
     step();
+   
     while (runs != runcycles) 
     {
       try 
       {
-        Thread.sleep(2000);
+        Thread.sleep(1000);
       } 
       catch(InterruptedException e) 
       {  
         /* Do nothing */ 
       }
       step();
+     
     }  
   }
 
@@ -500,6 +503,8 @@ public class Kernel extends Thread{
     Instruction instruct = ( Instruction ) instructVector.elementAt( runs );
     controlPanel.instructionValueLabel.setText( instruct.inst );
     controlPanel.addressValueLabel.setText( Long.toString( instruct.addr , addressradix ) );
+    controlPanel.resultados.setText(controlPanel.resultados.getText()+"\n"+Resultados.get(cont));
+    cont++;
     getPage( Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) );
     if ( controlPanel.pageFaultValueLabel.getText() == "YES" ) 
     {
@@ -579,11 +584,13 @@ public class Kernel extends Thread{
     }
     runs++;
     controlPanel.timeValueLabel.setText( Integer.toString( runs*10 ) + " (ns)" );
+    
   }
 
   public void reset() {
     memVector.removeAllElements();
     instructVector.removeAllElements();
+    controlPanel.resultados.setText("");
     controlPanel.statusValueLabel.setText( "STOP" ) ;
     controlPanel.timeValueLabel.setText( "0" ) ;
     controlPanel.instructionValueLabel.setText( "NONE" ) ;
