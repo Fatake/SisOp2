@@ -6,7 +6,10 @@ import java.util.*;
 
 public class ControlPanel extends Frame {
   Kernel kernel ;
+
   JTextArea resultados = new JTextArea();
+  JScrollPane ContenedorResultados = new javax.swing.JScrollPane();
+
   Button runButton = new Button("run");
   Button stepButton = new Button("step");
   Button resetButton = new Button("reset");
@@ -652,7 +655,12 @@ public class ControlPanel extends Frame {
     resultados.setEditable(false);	
     resultados.setLineWrap(true);
     resultados.setBounds(285,360+25,400,400);
+    resultados.setColumns(20);
+    resultados.setRows(5);
+    ContenedorResultados.setViewportView(resultados);
+    //ContenedorResultados
     add(resultados);
+
 
     ///////////////////////////
 
