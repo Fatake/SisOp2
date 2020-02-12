@@ -430,25 +430,21 @@ public class Kernel extends Thread{
     }
   } 
 
-  public void setControlPanel(ControlPanel newControlPanel) 
-  {
+  public void setControlPanel(ControlPanel newControlPanel) {//Cambia el Panel de control
     controlPanel = newControlPanel ;
   }
 
-  public void getPage(int pageNum) 
-  {
+  public void getPage(int pageNum) {//Retorna una Pagina
     Page page = ( Page ) memVector.elementAt( pageNum );
     controlPanel.paintPage( page );
   }
 
-  private void printLogFile(String message)
-  {
+  private void printLogFile(String message){ //Imprime los problemas en el Archivo
     String line;
     String temp = "";
 
     File trace = new File(output);
-    if (trace.exists()) 
-    {
+    if (trace.exists()) {
       try 
       {
         DataInputStream in = new DataInputStream( new FileInputStream( output ) );
@@ -475,8 +471,7 @@ public class Kernel extends Thread{
     }
   }
 
-  public void run()
-  {
+  public void run(){//Corrida
     step();
    
     while (runs != runcycles) 
@@ -494,7 +489,7 @@ public class Kernel extends Thread{
     }  
   }
 
-  public void step(){
+  public void step(){//Paso a
     int i = 0;
 
     Instruction instruct = ( Instruction ) instructVector.elementAt( runs );
@@ -507,10 +502,13 @@ public class Kernel extends Thread{
       controlPanel.pageFaultValueLabel.setText( "NO" );
     }
     if ( instruct.inst.startsWith( "READ" ) ) {//Si va a leer
-      //Genera pafallo de pagina
+      //Selecciona la pagina que se quiere leer
       Page page = ( Page ) memVector.elementAt( 
         Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) );
+      
+      // Si la pagina esta en memoria virtual
       if ( page.physical == -1 ) {
+        System.out.println("Esta en Virtual");
         if ( doFileLog ){
           printLogFile( "READ " + Long.toString(instruct.addr , addressradix) + " ... page fault" );
         }
@@ -518,38 +516,32 @@ public class Kernel extends Thread{
           System.out.println( "READ " + Long.toString(instruct.addr , addressradix) + " ... page fault" );
         }
         PageFault.replacePage( memVector , virtPageNum , Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) , controlPanel );
-        controlPanel.resultados.setText("\n Error de Segmento");
-        controlPanel.pageFaultValueLabel.setText( "Cambiada" );
-      } 
-      else {
+        controlPanel.resultados.setText(controlPanel.resultados.getText()+"\nError de Pagina");
+        controlPanel.pageFaultValueLabel.setText( "Yes" );
+      } else {
         page.R = 1;
         page.lastTouchTime = 0;   
-        if ( doFileLog )
-        {
+        if ( doFileLog ){
           printLogFile( "READ " + Long.toString( instruct.addr , addressradix ) + " ... okay" );
         }
-        if ( doStdoutLog )
-        {
+        if ( doStdoutLog ){
           System.out.println( "READ " + Long.toString( instruct.addr , addressradix ) + " ... okay" );
         }
       }
     }
-    if ( instruct.inst.startsWith( "WRITE" ) ) 
-    {
+    //
+    if ( instruct.inst.startsWith( "WRITE" ) ) { //Si la instruccion es leer
       Page page = ( Page ) memVector.elementAt( Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) );
-      if ( page.physical == -1 ) 
-      {
-        if ( doFileLog )
-        {
+      if ( page.physical == -1 ) {//Si es pagina Virtual
+        if ( doFileLog ){
           printLogFile( "WRITE " + Long.toString(instruct.addr , addressradix) + " ... page fault" );
         }
-        if ( doStdoutLog )
-        {
+        if ( doStdoutLog ){
            System.out.println( "WRITE " + Long.toString(instruct.addr , addressradix) + " ... page fault" );
         }
         PageFault.replacePage( memVector , virtPageNum , Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) , controlPanel );
-        controlPanel.pageFaultValueLabel.setText( "Cambiada" );
-        controlPanel.resultados.setText("\n Error de Segmento");
+        controlPanel.pageFaultValueLabel.setText( "Yes" );
+        controlPanel.resultados.setText(controlPanel.resultados.getText()+"\nError de Pagina");
       } 
       else 
       {

@@ -4,10 +4,6 @@
     Los usuarios de este programa deben reescribir PageFault para 
     implementar el algoritmo de reemplazo de página.
 */
-
-  // This PageFault file is an example of the FIFO Page Replacement 
-  // Algorithm as described in the Memory Management section.
-
 import java.util.*;
 
 
@@ -62,54 +58,44 @@ public class PageFault {//Algoritmo de Reemplazo de pagina
    */
   public static void replacePage ( Vector mem , int virtPageNum , int replacePageNum , ControlPanel controlPanel ) {
     /* NRU algoritmo */
-    int numeroPaginas = mem.size();//Cantidad de paginas
-    int oldestPage = 0 ;
-    boolean eliminada = false;
-    
-    for (int i=0; i<numeroPaginas ;i++){//Para cada pagina
-      /*
-        busca una pagina segun el algoritmo
-        que cumpla con la tabla de prioridades de abajo
+    int count = 0;
+    int oldestPage = -1;
+    int oldestTime = 0;
+    int firstPage = -1;
+    int map_count = 0;
+    boolean mapped = false;
 
-        R   M
-        0   0  mas prioridad
-        0   1
-        1   0
-        1   1  menos prioridad
-      */
-      Page pagina = (Page) mem.get(i);
-      
-      if( pagina.R == 0 && pagina.M == 0){//Prioridad mas alta
-        oldestPage = i;
-        break;
+    while ( ! (mapped) || count != virtPageNum ) {
+      Page page = ( Page ) mem.elementAt( count );
+      if ( page.physical != -1 ) {
+        if (firstPage == -1) {
+          firstPage = count;
+        }
+        if (page.inMemTime > oldestTime) {
+          oldestTime = page.inMemTime;
+          oldestPage = count;
+          mapped = true;
+        }
       }
-      if( pagina.R == 0 && pagina.M == 1){
-        oldestPage = i;
-        break;
-      }
-      if( pagina.R == 1 && pagina.M == 0){
-        oldestPage = i;
-        break;
-      }
-      if( pagina.R == 1 && pagina.M == 1){//Prioridad mas Baja
-        oldestPage = i;
-        break;
+      count++;
+      if ( count == virtPageNum ) {
+        mapped = true;
       }
     }
-
-    Page page = ( Page ) mem.elementAt( oldestPage );//Obtiene la pagiana antigua
+    if (oldestPage == -1) {
+      oldestPage = firstPage;
+    }
+    Page page = ( Page ) mem.elementAt( oldestPage );
     Page nextpage = ( Page ) mem.elementAt( replacePageNum );
-
     controlPanel.removePhysicalPage( oldestPage );
     nextpage.physical = page.physical;
-
+    controlPanel.resultados.setText(controlPanel.resultados.getText()+"\nCambiado.."+nextpage.physical);
     controlPanel.addPhysicalPage( nextpage.physical , replacePageNum );
-
     page.inMemTime = 0;
-    page.lastTouchTime = 330;
+    page.lastTouchTime = 0;
     page.R = 0;
-    page.M = 1;
-    page.physical = -1;//Si genera fallo
+    page.M = 0;
+    page.physical = -1;
   }
   /*
    //  Fifo   // 
@@ -139,5 +125,56 @@ public class PageFault {//Algoritmo de Reemplazo de pagina
     if (oldestPage == -1) {
       oldestPage = firstPage;
     }
-  */
+    
+
+    int numeroPaginas = mem.size();//Cantidad de paginas
+    int oldestPage = 0 ;
+    boolean eliminada = false;
+    for (int i=0; i<numeroPaginas ;i++){//Para cada pagina
+        busca una pagina segun el algoritmo
+        que cumpla con la tabla de prioridades de abajo
+
+        R   M
+        0   0  mas prioridad
+        0   1
+        1   0
+        1   1  menos prioridad
+      Page pagina = (Page) mem.get(i);
+      //Busca Para cada Pagina
+      controlPanel.resultados.setText(controlPanel.resultados.getText()+"\nBuscando.."+pagina.id);
+      if( pagina.R == 0 && pagina.M == 0){//Prioridad mas alta
+        oldestPage = i;
+        break;
+      }
+      if( pagina.R == 0 && pagina.M == 1){
+        oldestPage = i;
+        break;
+      }
+      if( pagina.R == 1 && pagina.M == 0){
+        oldestPage = i;
+        break;
+      }
+      if( pagina.R == 1 && pagina.M == 1){//Prioridad mas Baja
+        oldestPage = i;
+        break;
+      }
+    }
+
+    Page page = ( Page ) mem.elementAt( replacePageNum );
+    Page nextpage = ( Page ) mem.elementAt( oldestPage );
+
+    controlPanel.removePhysicalPage( replacePageNum );
+    System.out.println("Cambiando a: "+oldestPage);
+    page.physical = nextpage.physical; 
+
+    controlPanel.addPhysicalPage( nextpage.physical , replacePageNum );
+
+    page.inMemTime = 111110;
+    page.lastTouchTime = 111110;
+    page.R = 0;
+    page.M = 1;
+    page.physical = -1;
+
+    
+    */
 }

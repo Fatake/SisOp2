@@ -11,8 +11,7 @@ public class Page {
   public long high;
   public long low;
 
-  public Page( int id, int physical, byte R, byte M, int inMemTime, int lastTouchTime, long high, long low ) 
-  {
+  public Page( int id, int physical, byte R, byte M, int inMemTime, int lastTouchTime, long high, long low ) {
     this.id = id;
     this.physical = physical;
     this.R = R;
