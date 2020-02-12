@@ -1,0 +1,6 @@
+WRITE 0 ... okay
+WRITE 0 ... okay
+READ 0 ... okay
+WRITE 4000 ... okay
+READ 4000 ... okay
+WRITE 8000 ... okay

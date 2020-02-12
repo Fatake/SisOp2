@@ -105,9 +105,9 @@ public class PageFault {//Algoritmo de Reemplazo de pagina
 
     controlPanel.addPhysicalPage( nextpage.physical , replacePageNum );
     page.inMemTime = 0;
-    page.lastTouchTime = 0;
+    page.lastTouchTime = 330;
     page.R = 0;
-    page.M = 0;
+    page.M = 1;
     page.physical = -1;
   }
   /*
