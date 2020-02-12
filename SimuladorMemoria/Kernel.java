@@ -16,7 +16,6 @@ public class Kernel extends Thread{
   public ControlPanel controlPanel ;
   static private Vector memVector = new Vector();
   static private Vector instructVector = new Vector();
-  static private String status;
   private boolean doStdoutLog = false;
   private boolean doFileLog = false;
   public int runs;
@@ -32,8 +31,7 @@ public class Kernel extends Thread{
   static public long seg5=524287;//19-31
   //////
 
-  public void init( String commands , String config )  
-  {
+  public void init( String commands , String config )  {
     File f = new File( commands );
     command_file = commands; 
     config_file = config;
@@ -496,8 +494,7 @@ public class Kernel extends Thread{
     }  
   }
 
-  public void step()
-  {
+  public void step(){
     int i = 0;
 
     Instruction instruct = ( Instruction ) instructVector.elementAt( runs );
@@ -506,28 +503,25 @@ public class Kernel extends Thread{
     controlPanel.resultados.setText(controlPanel.resultados.getText()+"\n"+Resultados.get(cont));
     cont++;
     getPage( Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) );
-    if ( controlPanel.pageFaultValueLabel.getText() == "YES" ) 
-    {
+    if ( controlPanel.pageFaultValueLabel.getText() == "YES" ) {
       controlPanel.pageFaultValueLabel.setText( "NO" );
     }
-    if ( instruct.inst.startsWith( "READ" ) ) 
-    {
-      Page page = ( Page ) memVector.elementAt( Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) );
-      if ( page.physical == -1 ) 
-      {
-        if ( doFileLog )
-        {
+    if ( instruct.inst.startsWith( "READ" ) ) {//Si va a leer
+      //Genera pafallo de pagina
+      Page page = ( Page ) memVector.elementAt( 
+        Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) );
+      if ( page.physical == -1 ) {
+        if ( doFileLog ){
           printLogFile( "READ " + Long.toString(instruct.addr , addressradix) + " ... page fault" );
         }
-        if ( doStdoutLog )
-        {
+        if ( doStdoutLog ){
           System.out.println( "READ " + Long.toString(instruct.addr , addressradix) + " ... page fault" );
         }
         PageFault.replacePage( memVector , virtPageNum , Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) , controlPanel );
-        controlPanel.pageFaultValueLabel.setText( "YES" );
+        controlPanel.resultados.setText("\n Error de Segmento");
+        controlPanel.pageFaultValueLabel.setText( "Cambiada" );
       } 
-      else 
-      {
+      else {
         page.R = 1;
         page.lastTouchTime = 0;   
         if ( doFileLog )
@@ -553,7 +547,9 @@ public class Kernel extends Thread{
         {
            System.out.println( "WRITE " + Long.toString(instruct.addr , addressradix) + " ... page fault" );
         }
-        PageFault.replacePage( memVector , virtPageNum , Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) , controlPanel );          controlPanel.pageFaultValueLabel.setText( "YES" );
+        PageFault.replacePage( memVector , virtPageNum , Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) , controlPanel );
+        controlPanel.pageFaultValueLabel.setText( "Cambiada" );
+        controlPanel.resultados.setText("\n Error de Segmento");
       } 
       else 
       {

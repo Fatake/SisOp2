@@ -153,18 +153,15 @@ public class ControlPanel extends Frame {
   Label l62 = new Label(null, Label.CENTER);
   Label l63 = new Label(null, Label.CENTER);
 
-  public ControlPanel() 
-  {
+  public ControlPanel() {
     super();
   }
 
-  public ControlPanel( String title ) 
-  {
+  public ControlPanel( String title ) {
     super(title);
   }
 
-  public void init( Kernel useKernel , String commands , String config ) 
-  {
+  public void init( Kernel useKernel , String commands , String config ) {
     kernel = useKernel ;
     kernel.setControlPanel( this );
     kernel.init( commands , config );
@@ -644,34 +641,20 @@ public class ControlPanel extends Frame {
     Label Seg5=new Label("SEGMENTO 5: 19-31", Label.LEFT);
     Seg5.reshape(285,340+25,200,15);
     add(Seg5);
-    /*
-	 * 
-	 * 
-	 * ESTO ES LO QUE YO AGREGE
-	 * PARA QUE SE MOSTRARAN LOS RESULTADOS 
-	 * DE SEGMENTACION
-	 * 
-	 * 
-	 * 
-	 */
     
-	
-	/*String s="";
-	for(int i=0;i<useKernel.Resultados.size();i++)
-		s=s+"\n"+useKernel.Resultados.get(i);
-*/
-	
-	
-	resultados.setEditable(false);	
-	resultados.setLineWrap(true);
-	resultados.setBounds(285,360+25,400,400);
-	add(resultados);
+    //
+    // Etiquetas de resultados de paginacion
+    //
+    /*String s="";
+    for(int i=0;i<useKernel.Resultados.size();i++)
+      s=s+"\n"+useKernel.Resultados.get(i);
+    */
+    resultados.setEditable(false);	
+    resultados.setLineWrap(true);
+    resultados.setBounds(285,360+25,400,400);
+    add(resultados);
 
-
-
-
-
-///////////////////////////
+    ///////////////////////////
 
     l0.reshape( 70, (2)*15+25, 60, 15 );
     l0.setForeground( Color.red );
