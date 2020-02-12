@@ -25,10 +25,10 @@ public class Kernel extends Thread{
   public static byte addressradix = 10;
   ///
   static public long seg1 = 49151;//Valor decimal del limite de pagina 0-2
-  static public long seg2=147455;//3-8
-  static public long seg3=262143;//9-15
-  static public long seg4=311295;//16-18 
-  static public long seg5=524287;//19-31
+  static public long seg2 = 147455;//3-8
+  static public long seg3 = 262143;//9-15
+  static public long seg4 = 311295;//16-18 
+  static public long seg5 = 524287;//19-31
   //////
 
   public void init( String commands , String config )  {
@@ -56,8 +56,7 @@ public class Kernel extends Thread{
     long address_limit = (block * virtPageNum+1)-1;
   
   
-    if ( config != null )
-    {
+    if ( config != null ){
       f = new File ( config );
       try 
       {
@@ -471,8 +470,7 @@ public class Kernel extends Thread{
   public void run(){//Corrida
     step();
    
-    while (runs != runcycles) 
-    {
+    while (runs != runcycles) {
       try 
       {
         Thread.sleep(1000);
@@ -491,31 +489,38 @@ public class Kernel extends Thread{
 
     Instruction instruct = ( Instruction ) instructVector.elementAt( runs );
     controlPanel.instructionValueLabel.setText( instruct.inst );
-    controlPanel.addressValueLabel.setText( Long.toString( instruct.addr , addressradix ) );
-    controlPanel.resultados.setText(controlPanel.resultados.getText()+"\n"+Resultados.get(cont));
+    controlPanel.addressValueLabel.setText( Long.toString( instruct.addr , 
+                                            addressradix ) );
+    controlPanel.resultados.setText(controlPanel.resultados.getText()+"\n"+
+                                            Resultados.get(cont));
     cont++;
     getPage( Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) );
-    if ( controlPanel.pageFaultValueLabel.getText() == "YES" ) {
+    if ( controlPanel.pageFaultValueLabel.getText() == "Yes" ) {
       controlPanel.pageFaultValueLabel.setText( "NO" );
     }
+    
+    //
     if ( instruct.inst.startsWith( "READ" ) ) {//Si va a leer
       //Selecciona la pagina que se quiere leer
       Page page = ( Page ) memVector.elementAt( 
         Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) );
       
       // Si la pagina esta en memoria virtual
-      if ( page.physical == -1 ) {
+      if ( page.physical == -1 ) {//Genera fallo de pagina
+        System.out.println("\033[H\033[2J");
         System.out.println("Esta en Virtual");
+        //Imprime en el archivo fileLog
         if ( doFileLog ){
           printLogFile( "READ " + Long.toString(instruct.addr , addressradix) + " ... page fault" );
         }
         if ( doStdoutLog ){
           System.out.println( "READ " + Long.toString(instruct.addr , addressradix) + " ... page fault" );
         }
+        //Llama a remplazo de paginas
         PageFault.replacePage( memVector , virtPageNum , Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) , controlPanel );
         controlPanel.resultados.setText(controlPanel.resultados.getText()+"\nError de Pagina");
         controlPanel.pageFaultValueLabel.setText( "Yes" );
-      } else {
+      } else {//Si esta en memoria no Genera fallo de pagina
         page.R = 1;
         page.lastTouchTime = 0;   
         if ( doFileLog ){
@@ -526,6 +531,7 @@ public class Kernel extends Thread{
         }
       }
     }
+    
     //
     if ( instruct.inst.startsWith( "WRITE" ) ) { //Si la instruccion es leer
       Page page = ( Page ) memVector.elementAt( Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) );
@@ -539,9 +545,7 @@ public class Kernel extends Thread{
         PageFault.replacePage( memVector , virtPageNum , Virtual2Physical.pageNum( instruct.addr , virtPageNum , block ) , controlPanel );
         controlPanel.pageFaultValueLabel.setText( "Yes" );
         controlPanel.resultados.setText(controlPanel.resultados.getText()+"\nError de Pagina");
-      } 
-      else 
-      {
+      } else {
         page.M = 1;
         page.lastTouchTime = 0;
         if ( doFileLog )
@@ -554,15 +558,15 @@ public class Kernel extends Thread{
         }
       }
     }
-    for ( i = 0; i < virtPageNum; i++ ) 
-    {
+    
+    //Elimina el bit de referencia a un cuantum de tiempo
+    int cuantumTime = 50;
+    for ( i = 0; i < virtPageNum; i++ ) {
       Page page = ( Page ) memVector.elementAt( i );
-      if ( page.R == 1 && page.lastTouchTime == 250 ) 
-      {
+      if ( page.R == 1 && page.lastTouchTime == cuantumTime ) {
         page.R = 0;
       }
-      if ( page.physical != -1 ) 
-      {
+      if ( page.physical != -1 ) {
         page.inMemTime = page.inMemTime + 10;
         page.lastTouchTime = page.lastTouchTime + 10;
       }

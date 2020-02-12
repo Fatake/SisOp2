@@ -62,7 +62,8 @@ public class PageFault {//Algoritmo de Reemplazo de pagina
     int oldestPage = -1 ;
 
     for (int i=0; i<numeroPaginas ;i++){//Para cada pagina
-      /*busca una pagina segun el algoritmo
+      /*
+      busca una pagina segun el algoritmo
       que cumpla con la tabla de prioridades de abajo
 
       R   M
@@ -72,19 +73,15 @@ public class PageFault {//Algoritmo de Reemplazo de pagina
       1   1  menos prioridad
       */
       System.out.println("Iteracion: "+i);
+      
       Page pagina = (Page) mem.get(i);
-
+      System.out.print("R= "+pagina.R);
+      System.out.println(" M= "+pagina.M);
       //Pregunta su bit de referencia
       if( pagina.R == 0 && pagina.M == 0){//Prioridad mas alta
           oldestPage = i;
           break;
       } else if( pagina.R == 0 && pagina.M == 1){
-          oldestPage = i;
-          break;
-      }else if( pagina.R == 1 && pagina.M == 0){
-          oldestPage = i;
-          break;
-      }else if( pagina.R == 1 && pagina.M == 1){//Prioridad mas Baja
           oldestPage = i;
           break;
       }
@@ -98,11 +95,11 @@ public class PageFault {//Algoritmo de Reemplazo de pagina
     controlPanel.resultados.setText(controlPanel.resultados.getText()+"\nCambiado a:"+oldestPage);
     
     controlPanel.addPhysicalPage( nextpage.physical , oldestPage );
-    page.inMemTime = 0;
+    page.inMemTime = 10;
     page.lastTouchTime = 0;
     page.R = 1;
     page.M = 0;
-    page.physical = -1;
+    page.physical = oldestPage;
   }
   /*
    //  Fifo   // 
