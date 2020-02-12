@@ -20,66 +20,56 @@ import java.util.Random;
  */
 public class NRU {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args, Page delete) {
-        int X;//Valos Aleatorio que genera el numero entre 0-63
-        int n = 63;
-        int contador = 0 ;//64 paginas
-        Random num = new Random();
-        boolean pagefault;
+    public static void replacePage ( Vector mem , int virtPageNum , int replacePageNum , ControlPanel controlPanel ) {
+        /* NRU algoritmo */
+        int numeroPaginas = mem.size();//Cantidad de paginas
+        int oldestPage = 0 ;
         boolean eliminada = false;
-        Page  pagina [] = new Page[63];
+        for (int i=0; i<numeroPaginas ;i++){//Para cada pagina
+            /*busca una pagina segun el algoritmo
+            que cumpla con la tabla de prioridades de abajo
 
-        for(int i=0; i < n ; i++){//inicializar todo en 0 
-            pagina[i].R=0;//Bit de referencia = 0
-            pagina[i].M=0;//Bit de Modificado = 0
+            R   M
+            0   0  mas prioridad
+            0   1
+            1   0
+            1   1  menos prioridad
+            */
+        Page pagina = (Page) mem.get(i);
+        //Busca Para cada Pagina
+        controlPanel.resultados.setText(controlPanel.resultados.getText()+"\nBuscando.."+pagina.id);
+        if( pagina.R == 0 && pagina.M == 0){//Prioridad mas alta
+            oldestPage = i;
+            break;
+        }
+        if( pagina.R == 0 && pagina.M == 1){
+            oldestPage = i;
+            break;
+        }
+        if( pagina.R == 1 && pagina.M == 0){
+            oldestPage = i;
+            break;
+        }
+        if( pagina.R == 1 && pagina.M == 1){//Prioridad mas Baja
+            oldestPage = i;
+            break;
+        }
         }
 
-        //Mientras no exista un falo de pagina
-        do {
-            X = num.nextInt(64); //Se selecicona una pagina al azar
-            pagina[X].M = 1;// y modificado 
-            
-            //Fallo de pagina
-            if(X > n){//Si el X es > al numero de paginas
-                pagefault = true;//bandera se actiVA
-                for (int i=0;i<n;i++){//Para cada pagina
-                    /*
-                        busca una pagina segun el algoritmo
-                        que cumpla con la tabla de prioridades de abajo
+        Page page = ( Page ) mem.elementAt( replacePageNum );
+        Page nextpage = ( Page ) mem.elementAt( oldestPage );
 
-                        R   M
-                        0   0  mas prioridad
-                        0   1
-                        1   0
-                        1   1  menos prioridad
-                    */
-                    do{//Mientras no se elimine
-                        if( pagina[i].R == 0 && pagina[i].M == 0){//Prioridad mas alta
-                            pagina[i] = delete;
-                            eliminada = true;
-                        }
-                        if( pagina[i].R == 0 && pagina[i].M == 1){
-                            pagina[i] = delete;
-                            eliminada = true;
-                        }
-                        if( pagina[i].R == 1 && pagina[i].M == 0){
-                            pagina[i] = delete;
-                            eliminada = true;
-                        }
-                        if( pagina[i].R == 1 && pagina[i].M == 1){//Prioridad mas Baja
-                            pagina[i] = delete;
-                            eliminada = true;
-                        }
-                    }while(eliminada != true);
-                    if (eliminada)
-                        break;
-                    
-                }
-            }
-        } while (eliminada);
+        controlPanel.removePhysicalPage( replacePageNum );
+        System.out.println("Cambiando a: "+oldestPage);
+        page.physical = nextpage.physical; 
+
+        controlPanel.addPhysicalPage( nextpage.physical , replacePageNum );
+
+        page.inMemTime = 111110;
+        page.lastTouchTime = 111110;
+        page.R = 0;
+        page.M = 1;
+        page.physical = -1;
     }
     
 }

@@ -127,53 +127,7 @@ public class PageFault {//Algoritmo de Reemplazo de pagina
     }
     
 
-    int numeroPaginas = mem.size();//Cantidad de paginas
-    int oldestPage = 0 ;
-    boolean eliminada = false;
-    for (int i=0; i<numeroPaginas ;i++){//Para cada pagina
-        busca una pagina segun el algoritmo
-        que cumpla con la tabla de prioridades de abajo
-
-        R   M
-        0   0  mas prioridad
-        0   1
-        1   0
-        1   1  menos prioridad
-      Page pagina = (Page) mem.get(i);
-      //Busca Para cada Pagina
-      controlPanel.resultados.setText(controlPanel.resultados.getText()+"\nBuscando.."+pagina.id);
-      if( pagina.R == 0 && pagina.M == 0){//Prioridad mas alta
-        oldestPage = i;
-        break;
-      }
-      if( pagina.R == 0 && pagina.M == 1){
-        oldestPage = i;
-        break;
-      }
-      if( pagina.R == 1 && pagina.M == 0){
-        oldestPage = i;
-        break;
-      }
-      if( pagina.R == 1 && pagina.M == 1){//Prioridad mas Baja
-        oldestPage = i;
-        break;
-      }
-    }
-
-    Page page = ( Page ) mem.elementAt( replacePageNum );
-    Page nextpage = ( Page ) mem.elementAt( oldestPage );
-
-    controlPanel.removePhysicalPage( replacePageNum );
-    System.out.println("Cambiando a: "+oldestPage);
-    page.physical = nextpage.physical; 
-
-    controlPanel.addPhysicalPage( nextpage.physical , replacePageNum );
-
-    page.inMemTime = 111110;
-    page.lastTouchTime = 111110;
-    page.R = 0;
-    page.M = 1;
-    page.physical = -1;
+    
 
     
     */
