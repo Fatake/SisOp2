@@ -1,7 +1,0 @@
-READ 1000 ... page fault
-WRITE 0 ... page fault
-READ 0 ... page fault
-WRITE 4000 ... okay
-READ 4000 ... okay
-WRITE 8000 ... okay
-READ 8000 ... okay

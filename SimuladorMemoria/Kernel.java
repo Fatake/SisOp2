@@ -267,9 +267,9 @@ public class Kernel extends Thread{
               if (addr >= 0 && addr <= seg1)
               {
                 if(pagina <= seg1){
-				this.Resultados.add("S1 " + "P"+ pagina/block);
-                //JOptionPane.showMessageDialog(null, "S1 " + "Pagina:    "+ pagina/block);
-                instructVector.addElement(new Instruction(command,addr));
+				          this.Resultados.add("S1 " + "P"+ pagina/block);
+                  //JOptionPane.showMessageDialog(null, "S1 " + "Pagina:    "+ pagina/block);
+                  instructVector.addElement(new Instruction(command,addr));
                 }
                 else{
                   this.Resultados.add("Error, la pagina no esta dentro del segmento 1.");
@@ -277,16 +277,15 @@ public class Kernel extends Thread{
                 }
               }
               else {
-                if (addr >= seg1+1 && addr <=seg2)
-                {
+                if (addr >= seg1+1 && addr <=seg2){
                   if (pagina <= seg2){
-                this.Resultados.add("S2 " + "P"+ pagina/block);
+                    this.Resultados.add("S2 " + "P"+ pagina/block);
                     //JOptionPane.showMessageDialog(null, "S2 " + "Pagina:    "+ pagina/block);
                     instructVector.addElement(new Instruction(command,addr));
                 }
                 else{
-					this.Resultados.add("Error, la pagina no esta dentro del segmento 2.");
-                //  JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 2.");
+					        this.Resultados.add("Error, la pagina no esta dentro del segmento 2.");
+                  //  JOptionPane.showMessageDialog(null, "Error, la pagina no esta dentro del segmento 2.");
                 }
               }
               else 
@@ -322,7 +321,7 @@ public class Kernel extends Thread{
                 if (addr >= seg4+1 && addr <=seg5)
                 {
                   if (pagina <= seg5){
-					  this.Resultados.add("S5 " + "P"+ pagina/block);
+					          this.Resultados.add("S5 " + "P"+ pagina/block);
                     //JOptionPane.showMessageDialog(null, "S5 " + "Pagina:    "+ pagina/block);
                     instructVector.addElement(new Instruction(command,addr));
                 }
@@ -340,9 +339,7 @@ public class Kernel extends Thread{
             {
               addr = Long.parseLong(tmp);
             }
-            if (0 > addr || addr > address_limit)
-            {
-          
+            if (0 > addr || addr > address_limit) {
               System.out.println("MemoryManagement: " + addr + ", Address out of range in " + commands);
               System.exit(-1);
             }
