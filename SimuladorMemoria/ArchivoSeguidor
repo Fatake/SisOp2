@@ -1,4 +1,0 @@
-WRITE 4000 ... okay
-WRITE 1000 ... page fault
-READ 1000 ... page fault
-READ 0 ... page fault
