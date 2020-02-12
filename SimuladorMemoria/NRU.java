@@ -37,7 +37,6 @@ public class NRU {
             */
         Page pagina = (Page) mem.get(i);
         //Busca Para cada Pagina
-        controlPanel.resultados.setText(controlPanel.resultados.getText()+"\nBuscando.."+pagina.id);
         if( pagina.R == 0 && pagina.M == 0){//Prioridad mas alta
             oldestPage = i;
             break;
@@ -65,8 +64,8 @@ public class NRU {
 
         controlPanel.addPhysicalPage( nextpage.physical , replacePageNum );
 
-        page.inMemTime = 111110;
-        page.lastTouchTime = 111110;
+        page.inMemTime = 0;
+        page.lastTouchTime = 0;
         page.R = 0;
         page.M = 1;
         page.physical = -1;

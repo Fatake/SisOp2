@@ -89,7 +89,7 @@ public class PageFault {//Algoritmo de Reemplazo de pagina
     Page nextpage = ( Page ) mem.elementAt( replacePageNum );
     controlPanel.removePhysicalPage( oldestPage );
     nextpage.physical = page.physical;
-    controlPanel.resultados.setText(controlPanel.resultados.getText()+"\nCambiado.."+nextpage.physical);
+    controlPanel.resultados.setText(controlPanel.resultados.getText()+"\nCambiado.."+oldestPage);
     controlPanel.addPhysicalPage( nextpage.physical , replacePageNum );
     page.inMemTime = 0;
     page.lastTouchTime = 0;
