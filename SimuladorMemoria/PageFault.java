@@ -125,10 +125,5 @@ public class PageFault {//Algoritmo de Reemplazo de pagina
     if (oldestPage == -1) {
       oldestPage = firstPage;
     }
-    
-
-    
-
-    
     */
 }
