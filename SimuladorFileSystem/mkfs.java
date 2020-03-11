@@ -57,10 +57,9 @@ public class mkfs{
    * @exception java.lang.Exception if any exception occurs
    */
   public static void main( String[] argv ) throws Exception{
-    if( argv.length != 3 )
-    {
+    if( argv.length != 3 ){
       System.err.println( 
-        "mkfs: usage: java mkfs <filename> <block-size> <blocks>" ) ;
+        "mkfs usage:\n java mkfs <filename> <block-size> <blocks>" ) ;
       System.exit( 1 ) ;
     }
 
@@ -113,20 +112,18 @@ public class mkfs{
     int data_blocks = 0 ;
     int lo = 0 ;
     int hi = blocks ;
-    while( lo <= hi )
-    {
+    while( lo <= hi ){
       data_blocks = ( lo + hi + 1 ) / 2 ;
       free_list_blocks =
         ( data_blocks + block_size * 8 - 1 ) / 
           ( block_size * 8 ) ;
+
       inode_blocks =
         ( data_blocks + block_size / inode_size - 1 ) / 
           ( block_size / inode_size ) ;
+
       block_total = super_blocks + free_list_blocks + 
         inode_blocks + data_blocks ;
-
-      /*
-      Just in case you want to see it converge...
 
       System.out.println( "lo: " + lo + " hi: " + hi ) ;
       System.out.println( "block_size: " + block_size ) ;
@@ -136,7 +133,6 @@ public class mkfs{
       System.out.println( "data_blocks: " + data_blocks ) ;
       System.out.println( "block_total: " + block_total ) ;
       System.out.println() ;
-      */
 
       if ( block_total < blocks )
         lo = data_blocks + 1 ;
@@ -149,10 +145,8 @@ public class mkfs{
     // if the last block causes free_list_blocks or inode_blocks to
     // cross a block boundary, we "give" the extra space to the free
     // list and/or inodes and use whatever remains for the data blocks
-    if( block_total > blocks )
-    {
+    if( block_total > blocks ){
       // System.out.println( "adjusting data blocks..." ) ;
-      // System.out.println() ;
       data_blocks -- ;
     }
 
@@ -161,12 +155,13 @@ public class mkfs{
     free_list_blocks =
       ( data_blocks + block_size * 8 - 1 ) / 
         ( block_size * 8 ) ;
+
     inode_blocks = blocks - super_blocks - free_list_blocks - data_blocks ;
+
     block_total = super_blocks + free_list_blocks + 
       inode_blocks + data_blocks ;
 
-    if ( data_blocks <= 0 )
-    {
+    if ( data_blocks <= 0 ){
       System.err.println( 
         "mkfs: parameters resulted in data block count less than one" ) ;
       System.exit( 2 ) ;
@@ -224,8 +219,7 @@ public class mkfs{
 
     // write the rest of the free list blocks which should be empty
     BitBlock emptyFreeListBlock = new BitBlock( block_size ) ;
-    for( int i = freeListBlockOffset + 1 ; i < inodeBlockOffset ; i ++ )
-    {
+    for( int i = freeListBlockOffset + 1 ; i < inodeBlockOffset ; i ++ ){
       file.seek( i * block_size ) ;
       emptyFreeListBlock.write( file ) ; 
     }
