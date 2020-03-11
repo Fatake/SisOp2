@@ -80,7 +80,7 @@ public class mkfs{
 
       block_total = super_blocks + free_list_blocks + 
         inode_blocks + data_blocks ;
-
+      /*
       System.out.println( "lo: " + lo + " hi: " + hi ) ;
       System.out.println( "block_size: " + block_size ) ;
       System.out.println( "blocks: " + blocks ) ;
@@ -89,6 +89,7 @@ public class mkfs{
       System.out.println( "data_blocks: " + data_blocks ) ;
       System.out.println( "block_total: " + block_total ) ;
       System.out.println() ;
+      */
 
       if ( block_total < blocks )
         lo = data_blocks + 1 ;
