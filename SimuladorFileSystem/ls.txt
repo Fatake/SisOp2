@@ -1,0 +1,7 @@
+
+/:
+    0         64 .
+    0         64 ..
+    2         32 bin
+    1         32 home
+total files: 4
