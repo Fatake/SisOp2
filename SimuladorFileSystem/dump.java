@@ -42,24 +42,17 @@ import java.lang.Integer ;
 * </pre>
 * @author Ray Ontko
 */
-public class dump
-{
-
-  public static void main( String[] args )
-  {
-    for ( int i = 0 ; i < args.length ; i ++ )
-    {
+public class dump{
+  public static void main( String[] args ){
+    for ( int i = 0 ; i < args.length ; i ++ ){
       // open a file
-      try
-      {
+      try{
         FileInputStream ifile = new FileInputStream( args[i] ) ;
         BufferedInputStream in = new BufferedInputStream( ifile ) ;
         // while we are able to read bytes from it
         int c ;
-        for ( int j = 0 ; ( c = in.read() ) != -1 ; j ++ )
-        {
-          if( c > 0 )
-          {
+        for ( int j = 0 ; ( c = in.read() ) != -1 ; j ++ ){
+          if( c > 0 ){
             System.out.print( j + " " + Integer.toHexString( c ) + " " + c ) ;
             if( c >= 32 && c < 127 )
               System.out.print( " " + (char)c ) ;
@@ -67,13 +60,9 @@ public class dump
           }
         }
         in.close() ;
-      }
-      catch ( FileNotFoundException e ) 
-      {
+      } catch ( FileNotFoundException e ) {
         System.out.println( "error: unable to open input file " + args[i] ) ;
-      }
-      catch ( IOException e )
-      {
+      } catch ( IOException e ){
         System.out.println( "error: unable to read from file " + args[i] ) ;
       }
     }

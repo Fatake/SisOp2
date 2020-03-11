@@ -50,17 +50,13 @@ import java.io.* ;
  * classes to create a "file system".
  * @author Ray Ontko
  */
-public class mkfs
-{
-
-
+public class mkfs{
   /**
    * Creates a "file system" in the named file with the specified 
    * blocksize and number of blocks.
    * @exception java.lang.Exception if any exception occurs
    */
-  public static void main( String[] argv ) throws Exception
-  {
+  public static void main( String[] argv ) throws Exception{
     if( argv.length != 3 )
     {
       System.err.println( 
