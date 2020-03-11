@@ -29,8 +29,7 @@
  * </pre>
  * @author Ray Ontko
  */
-public class tee
-{
+public class tee{
   /**
    * The name of this program.  
    * This is the program name that is used 
