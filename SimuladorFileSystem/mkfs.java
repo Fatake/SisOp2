@@ -1,49 +1,5 @@
-/*
- * $Id: mkfs.java,v 1.11 2001/10/07 23:48:55 rayo Exp $
- */
 
 import java.io.* ;
-
-/*
- * $Log: mkfs.java,v $
- * Revision 1.11  2001/10/07 23:48:55  rayo
- * added author javadoc tag
- *
- * Revision 1.10  2001/09/29 20:57:12  rayo
- * added code to deal with conditions where an extra block causes
- * the number of inodes and free list bits to get too big.
- *
- * Revision 1.9  2001/09/25 12:53:15  rayo
- * fixed absolute block number problem.
- *
- * Revision 1.8  2001/09/24 06:13:09  rayo
- * all data block numbers are now relative to the beginning of the
- * file system file
- *
- * Revision 1.7  2001/09/22 22:03:31  rayo
- * many changes related to getting readdir() working, and adding FileSystem
- *
- * Revision 1.6  2001/09/18 03:08:40  rayo
- * added various corrections, including better inode for root
- * file.
- *
- * Revision 1.5  2001/09/17 03:19:22  rayo
- * fixed superblock, added support for root inode
- *
- * Revision 1.4  2001/09/17 01:44:07  rayo
- * added support for bit blocks, inodes, direntries
- * added boot block at beginning.
- *
- * Revision 1.3  2001/09/10 20:32:52  rayo
- * added @exception
- *
- * Revision 1.2  2001/09/09 23:12:50  rayo
- * added more documentation
- *
- * Revision 1.1  2001/09/02 22:09:12  rayo
- * Initial revision
- *
- */
 
 /**
  * A MOSS File System Simulator program which uses the simulator

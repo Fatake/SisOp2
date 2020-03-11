@@ -1,23 +1,9 @@
-/*
- * $Id: Kernel.java,v 1.23 2001/10/08 01:15:46 rayo Exp $
- * 456789012345678901234567890123456789012345678901234567890123456789012
- */
-
 import java.util.StringTokenizer ;
 import java.util.Properties ;
 import java.io.FileInputStream ;
 import java.io.IOException ;
 import java.io.FileNotFoundException ;
 
-/*
- * $Log: Kernel.java,v $
- * Revision 1.23  2001/10/08 01:15:46  rayo
- * modified directory entry to be more like dirent
- *
- * Revision 1.22  2001/10/07 23:48:55  rayo
- * added author javadoc tag
- *
- */
 
 /**
  * Simulates a unix-like file system.  Provides basic directory
@@ -25,8 +11,7 @@ import java.io.FileNotFoundException ;
  * disk block structures.
  * @author Ray Ontko
  */
-public class Kernel
-{
+public class Kernel{
 
   /**
    * The name this program uses when displaying any error messages 

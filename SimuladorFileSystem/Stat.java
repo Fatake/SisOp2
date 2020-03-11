@@ -1,27 +1,8 @@
-/*
- * $Id: Stat.java,v 1.3 2001/10/07 23:48:55 rayo Exp $
- */
-
-/*
- * $Log: Stat.java,v $
- * Revision 1.3  2001/10/07 23:48:55  rayo
- * added author javadoc tag
- *
- * Revision 1.2  2001/09/27 16:56:12  rayo
- * numerous improvements to stat, fstat, etc so that
- * ls and mkdir now seem to be working correctly
- *
- * Revision 1.1  2001/09/27 03:04:22  rayo
- * Initial revision
- *
- */
-
 /**
  * This simulates the unix struct "stat".
  * @author Ray Ontko
  */
-public class Stat
-{
+public class Stat{
 
   public short st_dev = 0 ;
 
