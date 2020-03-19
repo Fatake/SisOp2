@@ -1,7 +1,0 @@
-block_size: 64
-blocks: 8
-super_blocks: 1
-free_list_blocks: 1
-inode_blocks: 3
-data_blocks: 3
-block_total: 8

@@ -1,6 +1,0 @@
-
-/home:
-    1         48 .
-    0         48 ..
-    2         32 user
-total files: 3
