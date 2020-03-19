@@ -1,21 +1,3 @@
-/*
- * $Id: cat.java,v 1.3 2001/10/07 23:48:55 rayo Exp $
- */
-
-
-/*
- * $Log: cat.java,v $
- * Revision 1.3  2001/10/07 23:48:55  rayo
- * added author javadoc tag
- *
- * Revision 1.2  2001/10/07 23:23:23  rayo
- * added internal documentation, cleaned up javadoc
- *
- * Revision 1.1  2001/09/27 21:52:23  rayo
- * Initial revision
- *
- */
-
 /**
  * Reads a sequence of files and writes them to standard output.
  * A simple cat program for a simulated file system.
@@ -26,8 +8,7 @@
  * </pre>
  * @author Ray Ontko
  */
-public class cat
-{
+public class cat{
   /**
    * The name of this program.  
    * This is the program name that is used 
@@ -47,28 +28,24 @@ public class cat
    * @exception java.lang.Exception if an exception is thrown
    * by an underlying operation
    */
-  public static void main( String[] argv ) throws Exception
-  {
+  public static void main( String[] argv ) throws Exception{
     // initialize the file system simulator kernel
     Kernel.initialize() ;
 
     // display a helpful message if no arguments are given
-    if( argv.length == 0 )
-    {
+    if( argv.length == 0 ){
       System.err.println( PROGRAM_NAME + ": usage: java " + PROGRAM_NAME + 
         " input-file ..." ) ;
       Kernel.exit( 1 ) ;
     }
 
     // for each filename specified
-    for( int i = 0 ; i < argv.length ; i ++ )
-    {
+    for( int i = 0 ; i < argv.length ; i ++ ){
       String name = argv[i] ;
 
       // open the file for reading
       int in_fd = Kernel.open( name , Kernel.O_RDONLY ) ;
-      if( in_fd < 0 )
-      {
+      if( in_fd < 0 ){
         Kernel.perror( PROGRAM_NAME ) ;
         System.err.println( PROGRAM_NAME + ": unable to open input file \"" +
           name + "\"" ) ;
@@ -80,8 +57,7 @@ public class cat
 
       // read data while we can
       int rd_count ;
-      while( true )
-      {
+      while( true ){
         // read a buffer full of data
         rd_count = Kernel.read( in_fd , buffer , BUF_SIZE ) ;
 
@@ -97,8 +73,7 @@ public class cat
       Kernel.close( in_fd ) ;
 
       // exit with failure if we encounter an error
-      if( rd_count < 0 )
-      {
+      if( rd_count < 0 ){
         Kernel.perror( PROGRAM_NAME ) ;
         System.err.println( PROGRAM_NAME + 
           ": error during read from input file" ) ;

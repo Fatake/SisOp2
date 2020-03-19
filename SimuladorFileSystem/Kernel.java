@@ -4,7 +4,6 @@ import java.io.FileInputStream ;
 import java.io.IOException ;
 import java.io.FileNotFoundException ;
 
-
 /**
  * Simulates a unix-like file system.  Provides basic directory
  * and file operations and implements them in terms of the underlying
@@ -114,8 +113,7 @@ public class Kernel{
    *   const char *sys_errlist[];
    * </pre>
    */
-  public static final String[] sys_errlist = 
-  { 
+  public static final String[] sys_errlist = { 
     null
   , "Not owner"
   , "No such file or directory"
@@ -158,8 +156,7 @@ public class Kernel{
    * the program as the argument to perror.
    * @param s the program name
    */
-  public static void perror( String s )
-  {
+  public static void perror( String s ){
     String message = null ;
     if ( ( process.errno > 0 ) && ( process.errno < sys_nerr ) )
       message = sys_errlist[process.errno] ;
@@ -347,8 +344,7 @@ public class Kernel{
    * @return Zero if the file is closed; -1 if the file descriptor 
    * is invalid.
    */
-  public static int close(int fd)
-  {
+  public static int close(int fd){
     // check fd
     int status = check_fd( fd ) ;
     if( status < 0 )

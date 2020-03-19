@@ -1,19 +1,7 @@
-/*
- * $Id: BitBlock.java,v 1.3 2001/10/07 23:48:55 rayo Exp $
- */
-
-/*
- * $Log: BitBlock.java,v $
- * Revision 1.3  2001/10/07 23:48:55  rayo
- * added author javadoc tag
- *
- */
-
 /**
  * @author Ray Ontko
  */
-public class BitBlock extends Block
-{
+public class BitBlock extends Block{
 
   /**
    * Construct a bit block of the specified size in bytes.

@@ -1,7 +1,4 @@
-imprimerArchivo: comandos
-    touch file.txt
-
-comandos: 
+comandos:
   @echo "ls -al"
   ls -al
   @echo "CD /Documents  and pwd"

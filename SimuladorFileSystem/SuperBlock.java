@@ -1,35 +1,6 @@
-/*
- * $Id: SuperBlock.java,v 1.9 2001/10/07 23:48:55 rayo Exp $
- */
-
 import java.io.RandomAccessFile ;
 import java.io.IOException ;
 import java.util.*;
-
-/*
- * $Log: SuperBlock.java,v $
- * Revision 1.9  2001/10/07 23:48:55  rayo
- * added author javadoc tag
- *
- * Revision 1.8  2001/09/28 14:07:33  rayo
- * removed import of Node; no longer in use
- *
- * Revision 1.7  2001/09/22 22:03:31  rayo
- * many changes related to getting readdir() working, and adding FileSystem
- *
- * Revision 1.6  2001/09/17 03:18:32  rayo
- * added support for offsets, removed boot block
- *
- * Revision 1.5  2001/09/09 23:12:09  rayo
- * added documentation and write, read
- *
- * Revision 1.4  2001/09/02 20:25:55  rayo
- * cleanup indentation and comments
- *
- * Revision 1.3  2001/08/31 03:01:06  rayo
- * general formatting cleanup
- *
- */
 
 /**
  * @author Ray Ontko
