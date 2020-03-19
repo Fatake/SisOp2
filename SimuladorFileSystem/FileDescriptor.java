@@ -1,22 +1,9 @@
-/*
- * $Id: FileDescriptor.java,v 1.10 2001/10/07 23:48:55 rayo Exp $
- */
-
 import java.io.IOException ;
-
-/*
- * $Log: FileDescriptor.java,v $
- * Revision 1.10  2001/10/07 23:48:55  rayo
- * added author javadoc tag
- *
- */
-
 /**
  * A file descriptor for an open file in a simulated file system.
  * @author Ray Ontko
  */
-public class FileDescriptor
-{
+public class FileDescriptor{
   private FileSystem fileSystem = null ;
   private IndexNode indexNode = null ;
   private short deviceNumber = -1 ;
@@ -38,9 +25,7 @@ public class FileDescriptor
     bytes = new byte[fileSystem.getBlockSize()] ;
   }
 
-  FileDescriptor( FileSystem newFileSystem , IndexNode newIndexNode ,
-    int newFlags )
-  {
+  FileDescriptor( FileSystem newFileSystem , IndexNode newIndexNode ,int newFlags ){
     super() ;
     fileSystem = newFileSystem ;
     indexNode = newIndexNode ;

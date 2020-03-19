@@ -26,13 +26,11 @@ public class Stat{
 
   public int st_ctime = 0 ;
 
-    public void setDev( short newDev )
-  {
+  public void setDev( short newDev ){
     st_dev = newDev ;
   }
 
-  public short getDev()
-  {
+  public short getDev(){
     return st_dev ;
   }
 
@@ -96,48 +94,39 @@ public class Stat{
     return st_rdev ;
   }
 
-  public void setSize( int newSize )
-  {
+  public void setSize( int newSize ){
     st_size = newSize ;
   }
 
-  public int getSize()
-  {
+  public int getSize(){
     return st_size ;
   }
 
-  public void setAtime( int newAtime )
-  {
+  public void setAtime( int newAtime ){
     st_atime = newAtime ;
   }
 
-  public int getAtime()
-  {
+  public int getAtime(){
     return st_atime ;
   }
 
-  public void setMtime( int newMtime )
-  {
+  public void setMtime( int newMtime ){
     st_mtime = newMtime ;
   }
 
-  public int getMtime()
-  {
+  public int getMtime(){
     return st_mtime ;
   }
 
-  public void setCtime( int newCtime )
-  {
+  public void setCtime( int newCtime ){
     st_ctime = newCtime ;
   }
 
-  public int getCtime()
-  {
+  public int getCtime(){
     return st_ctime ;
   }
 
-  public void copyIndexNode( IndexNode indexNode )
-  {
+  public void copyIndexNode( IndexNode indexNode ){
     st_mode = indexNode.getMode() ;
     st_nlink = indexNode.getNlink() ;
     st_uid = indexNode.getUid() ;

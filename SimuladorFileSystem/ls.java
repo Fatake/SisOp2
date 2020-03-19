@@ -1,17 +1,3 @@
-/*
- * $Id: ls.java,v 1.6 2001/10/12 02:14:31 rayo Exp $
- */
-
-/*
- * $Log: ls.java,v $
- * Revision 1.6  2001/10/12 02:14:31  rayo
- * better formatting
- *
- * Revision 1.5  2001/10/07 23:48:55  rayo
- * added author javadoc tag
- *
- */
-
 /**
  * A simple directory listing program for a simulated file system.
  * <p>
@@ -21,8 +7,7 @@
  * </pre>
  * @author Ray Ontko
  */
-public class ls
-{
+public class ls{
   /**
    * The name of this program.  
    * This is the program name that is used 
@@ -35,22 +20,19 @@ public class ls
    * @exception java.lang.Exception if an exception is thrown
    * by an underlying operation
    */
-  public static void main( String[] args ) throws Exception
-  {
+  public static void main( String[] args ) throws Exception{
     // initialize the file system simulator kernel
     Kernel.initialize() ;
 
     // for each path-name given
-    for( int i = 0 ; i < args.length ; i ++ )
-    {
+    for( int i = 0 ; i < args.length ; i ++ ){
       String name = args[i] ; 
       int status = 0 ;
 
       // stat the name to get information about the file or directory
       Stat stat = new Stat() ;
       status = Kernel.stat( name , stat ) ;
-      if( status < 0 )
-      {
+      if( status < 0 ){
         Kernel.perror( PROGRAM_NAME ) ;
         Kernel.exit( 1 ) ;
       }
@@ -59,18 +41,15 @@ public class ls
       short type = (short)( stat.getMode() & Kernel.S_IFMT ) ;
 
       // if name is a regular file, print the info
-      if( type == Kernel.S_IFREG )
-      {
+      if( type == Kernel.S_IFREG ){
         print( name , stat ) ;
       }
    
       // if name is a directory open it and read the contents
-      else if( type == Kernel.S_IFDIR )
-      {
+      else if( type == Kernel.S_IFDIR ){
         // open the directory
         int fd = Kernel.open( name , Kernel.O_RDONLY ) ;
-        if( fd < 0 )
-        {
+        if( fd < 0 ){
           Kernel.perror( PROGRAM_NAME ) ;
           System.err.println( PROGRAM_NAME + 
             ": unable to open \"" + name + "\" for reading" ) ;
@@ -86,8 +65,7 @@ public class ls
         int count = 0 ;
 
         // while we can read, print the information on each entry
-        while( true ) 
-        {
+        while( true ) {
           // read an entry; quit loop if error or nothing read
           status = Kernel.readdir( fd , directoryEntry ) ;
           if( status <= 0 )
@@ -135,8 +113,7 @@ public class ls
    * @param name the name to print
    * @param stat the stat containing the file's information
    */
-  private static void print( String name , Stat stat )
-  {
+  private static void print( String name , Stat stat ){
     // a buffer to fill with a line of output
     StringBuffer s = new StringBuffer() ;
 

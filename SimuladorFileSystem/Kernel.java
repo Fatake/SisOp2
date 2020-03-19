@@ -946,8 +946,7 @@ public class Kernel{
    * Exception to be thrown
    */
   public static int stat( String name , Stat buf )
-    throws Exception
-  {
+    throws Exception{
     // a buffer for reading directory entries
     DirectoryEntry directoryEntry = new DirectoryEntry() ;
 
@@ -957,8 +956,7 @@ public class Kernel{
     // find the index node
     IndexNode indexNode = new IndexNode() ;
     short indexNodeNumber = findIndexNode( path , indexNode ) ; 
-    if( indexNodeNumber < 0 )
-    {
+    if( indexNodeNumber < 0 ){
       // return ENOENT
       process.errno = ENOENT ;
       return -1 ;
@@ -980,8 +978,7 @@ public class Kernel{
    *   int sync(void);
    * </pre>
    */
-  public static void sync()
-  {
+  public static void sync(){
     // write out superblock if updated
     // write out free list blocks if updated
     // write out inode blocks if updated
@@ -1128,24 +1125,23 @@ public class Kernel{
     return DirectoryEntry.DIRECTORY_ENTRY_SIZE ;
   }
 
-/*
-to be done:
-       int access(const char *pathname, int mode);
-       int link(const char *oldpath, const char *newpath);
-       int unlink(const char *pathname);
-       int rename(const char *oldpath, const char *newpath);
-       int symlink(const char *oldpath, const char *newpath);
-       int lstat(const char *file_name, struct stat *buf);
-       int chmod(const char *path, mode_t mode);
-       int fchmod(int fildes, mode_t mode);
-       int chown(const char *path, uid_t owner, gid_t group);
-       int fchown(int fd, uid_t owner, gid_t group);
-       int lchown(const char *path, uid_t owner, gid_t group);
-       int utime(const char *filename, struct utimbuf *buf);
-       int readlink(const char *path, char *buf, size_t bufsiz);
-       int chdir(const char *path);
-       mode_t umask(mode_t mask);
-*/
+  /*
+  public static int access(const char *pathname, int mode);
+  public static int link(const char *oldpath, const char *newpath);
+  public static int unlink(const char *pathname);
+  public static int rename(const char *oldpath, const char *newpath);
+  public static int symlink(const char *oldpath, const char *newpath);
+  public static int lstat(const char *file_name, struct stat *buf);
+  public static int chmod(const char *path, mode_t mode);
+  public static int fchmod(int fildes, mode_t mode);
+  public static int chown(const char *path, uid_t owner, gid_t group);
+  public static int fchown(int fd, uid_t owner, gid_t group);
+  public static int lchown(const char *path, uid_t owner, gid_t group);
+  public static int utime(const char *filename, struct utimbuf *buf);
+  public static int readlink(const char *path, char *buf, size_t bufsiz);
+  public static int chdir(const char *path);
+  public static mode_t umask(mode_t mask);
+  */
 
   /**
    * This is an internal variable for the simulator which always 
@@ -1338,10 +1334,6 @@ to be done:
     // terminate the program
     System.exit( status ) ;
   }
-
-/*
-Some internal methods.
-*/
 
   /**
    * Check to see if the integer given is a valid file descriptor
@@ -1539,8 +1531,7 @@ Some internal methods.
 
   // get the inode for a file which is expected to exist
   private static short findIndexNode( String path , IndexNode inode )
-    throws Exception
-  {
+    throws Exception{
     // start with the root file system, root inode
     FileSystem fileSystem = openFileSystems[ ROOT_FILE_SYSTEM ] ;
     IndexNode indexNode = getRootIndexNode( ) ;
