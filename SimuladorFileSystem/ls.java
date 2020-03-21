@@ -1,38 +1,31 @@
-/**
- * A simple directory listing program for a simulated file system.
- * <p>
- * Usage:
- * <pre>
- *   java ls <i>path-name</i> ...
- * </pre>
- * @author Ray Ontko
- */
-public class ls{
-  /**
-   * The name of this program.  
-   * This is the program name that is used 
-   * when displaying error messages.
-   */
-  public static String PROGRAM_NAME = "ls" ;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 
-  /**
-   * Lists information about named files or directories.
-   * @exception java.lang.Exception if an exception is thrown
-   * by an underlying operation
-   */
-  public static void main( String[] args ) throws Exception{
+public class ls
+{
+  
+  public static String PROGRAM_NAME = "ls" ;
+  public static void main( String[] args ) throws Exception
+  {
     // initialize the file system simulator kernel
     Kernel.initialize() ;
 
     // for each path-name given
-    for( int i = 0 ; i < args.length ; i ++ ){
+    for( int i = 0 ; i < args.length ; i ++ )
+    {
       String name = args[i] ; 
       int status = 0 ;
-
+      atime(name);
+      ctime(name);
+      mtime(name);
       // stat the name to get information about the file or directory
-      Stat stat = new Stat() ;
+      Stat stat = new Stat() ; 
       status = Kernel.stat( name , stat ) ;
-      if( status < 0 ){
+      if( status < 0 )
+      {
         Kernel.perror( PROGRAM_NAME ) ;
         Kernel.exit( 1 ) ;
       }
@@ -41,15 +34,19 @@ public class ls{
       short type = (short)( stat.getMode() & Kernel.S_IFMT ) ;
 
       // if name is a regular file, print the info
-      if( type == Kernel.S_IFREG ){
+      if( type == Kernel.S_IFREG )
+      {
         print( name , stat ) ;
+	//atime(name);
       }
    
       // if name is a directory open it and read the contents
-      else if( type == Kernel.S_IFDIR ){
+      else if( type == Kernel.S_IFDIR )
+      {
         // open the directory
         int fd = Kernel.open( name , Kernel.O_RDONLY ) ;
-        if( fd < 0 ){
+        if( fd < 0 )
+        {
           Kernel.perror( PROGRAM_NAME ) ;
           System.err.println( PROGRAM_NAME + 
             ": unable to open \"" + name + "\" for reading" ) ;
@@ -65,7 +62,8 @@ public class ls{
         int count = 0 ;
 
         // while we can read, print the information on each entry
-        while( true ) {
+        while( true ) 
+        {
           // read an entry; quit loop if error or nothing read
           status = Kernel.readdir( fd , directoryEntry ) ;
           if( status <= 0 )
@@ -100,6 +98,9 @@ public class ls{
 
         // print a footing for this directory
         System.out.println( "total files: " + count ) ;
+       atime(name);
+       ctime(name);
+       mtime(name);
       }
     }
 
@@ -113,7 +114,8 @@ public class ls{
    * @param name the name to print
    * @param stat the stat containing the file's information
    */
-  private static void print( String name , Stat stat ){
+  private static void print( String name , Stat stat )
+  {
     // a buffer to fill with a line of output
     StringBuffer s = new StringBuffer() ;
 
@@ -140,5 +142,32 @@ public class ls{
     // print the buffer
     System.out.println( s.toString() ) ;
   }
+
+
+private static void atime(String fileName)throws IOException{
+
+        //String fileName = args[0];
+        File myfile = new File(fileName);
+        Path path = myfile.toPath();
+        BasicFileAttributes fatr = Files.readAttributes (path, BasicFileAttributes.class);
+        System.out.printf("Last access time: %s%n", fatr.lastAccessTime());        
+}
+
+private static void ctime(String fileName)throws IOException {
+        
+  
+        File myfile = new File(fileName);
+        Path path = myfile.toPath();
+        BasicFileAttributes fatr = Files.readAttributes(path, BasicFileAttributes.class);  
+        System.out.printf("File creation time: %s%n", fatr.creationTime());
+    }
+
+private static void mtime (String fileName)throws IOException {
+
+        File myfile = new File(fileName);
+        Path path = myfile.toPath();
+        BasicFileAttributes fatr = Files.readAttributes(path,BasicFileAttributes.class);
+        System.out.printf("Last modification time: %s%n", fatr.lastModifiedTime());
+    }
 
 }

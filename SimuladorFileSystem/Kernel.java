@@ -1124,11 +1124,13 @@ public class Kernel{
     // return the size of a DirectoryEntry
     return DirectoryEntry.DIRECTORY_ENTRY_SIZE ;
   }
-
+  //Ejercicio 8
+  public static int unlink(String pathname){
+    return 1;
+  }
   /*
   public static int access(const char *pathname, int mode);
   public static int link(const char *oldpath, const char *newpath);
-  public static int unlink(const char *pathname);
   public static int rename(const char *oldpath, const char *newpath);
   public static int symlink(const char *oldpath, const char *newpath);
   public static int lstat(const char *file_name, struct stat *buf);
