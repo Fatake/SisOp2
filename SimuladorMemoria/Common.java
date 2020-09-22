@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 public class Common {
 
   static public long s2l ( String s ) {
@@ -12,8 +15,7 @@ public class Common {
     return i;
   }
 
-  static public int s2i ( String s ) 
-  {
+  static public int s2i ( String s ) {
     int i = 0;
 
     try {
@@ -25,8 +27,7 @@ public class Common {
     return i;
   }
 
-  static public byte s2b ( String s ) 
-  {
+  static public byte s2b ( String s ) {
     int i = 0;
     byte b = 0;
 
@@ -39,14 +40,12 @@ public class Common {
     return b;
   }
 
-  public static long randomLong( long MAX ) 
-  {
+  public static long randomLong( long MAX ) {
     long i = -1;
 
     java.util.Random generator = new
     java.util.Random(System.currentTimeMillis());
-    while (i > MAX || i < 0)
-    {
+    while (i > MAX || i < 0){
       int intOne = generator.nextInt();
       int intTwo = generator.nextInt();
       i = (long) intOne + intTwo;

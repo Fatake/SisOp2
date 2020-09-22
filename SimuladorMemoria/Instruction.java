@@ -1,5 +1,5 @@
-/*
- * Intrucciones?
+/**
+ * Clase instucciones
  */
 public class Instruction {
   public String inst;
@@ -8,6 +8,5 @@ public class Instruction {
   public Instruction( String inst, long addr ) {
     this.inst = inst;
     this.addr = addr;
-  } 	
-
+  }
 }

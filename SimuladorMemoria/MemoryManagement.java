@@ -1,5 +1,3 @@
-// The main MemoryManagement program, created by Alexander Reeder, 2000 Nov 19
-
 import java.applet.*;
 import java.awt.*;
 import java.io.*;
@@ -8,6 +6,10 @@ import java.util.*;
  * Clase manejo de memoria
  */
 public class MemoryManagement {
+  /**
+   * Main del programa
+   * @param args
+   */
   public static void main(final String[] args) {
     ControlPanel controlPanel;
     Kernel kernel;

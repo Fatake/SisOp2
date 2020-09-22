@@ -1,1 +1,0 @@
-javac -d class MemoryManagement.java

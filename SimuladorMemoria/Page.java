@@ -11,6 +11,17 @@ public class Page {
   public long high;
   public long low;
 
+  /**
+   * Constuctor
+   * @param id
+   * @param physical
+   * @param R
+   * @param M
+   * @param inMemTime
+   * @param lastTouchTime
+   * @param high
+   * @param low
+   */
   public Page( int id, int physical, byte R, byte M, int inMemTime, int lastTouchTime, long high, long low ) {
     this.id = id;
     this.physical = physical;

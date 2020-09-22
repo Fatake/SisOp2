@@ -3,11 +3,14 @@ import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
 
+/**
+ * CLase Kernel encargado de las paginas virtuales
+ */
 public class Kernel extends Thread{
   // The number of virtual pages must be fixed at 63 due to
   // dependencies in the GUI
   private static int virtPageNum = 63;
-  int cont=0;
+  int cont = 0;
   public ArrayList<String> Resultados = new ArrayList<String>();//ARRAY PARA INGRESAR LOS RESULTADOS DE SEGMENTACION
   private String output = null;
   private static final String lineSeparator = System.getProperty("line.separator");
@@ -31,6 +34,11 @@ public class Kernel extends Thread{
   static public long seg5 = 524287;//19-31
   //////
 
+  /**
+   * Inicializador
+   * @param commands
+   * @param config
+   */
   public void init( String commands , String config )  {
     File f = new File( commands );
     command_file = commands; 

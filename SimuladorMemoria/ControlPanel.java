@@ -4,6 +4,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.*;
 
+/**
+ * Clase que lleva la interfaz grafica
+ */
 public class ControlPanel extends Frame {
   Kernel kernel ;
 
@@ -156,6 +159,9 @@ public class ControlPanel extends Frame {
   Label l62 = new Label(null, Label.CENTER);
   Label l63 = new Label(null, Label.CENTER);
 
+  //
+  // Constuctores
+  //
   public ControlPanel() {
     super();
   }
@@ -164,6 +170,12 @@ public class ControlPanel extends Frame {
     super(title);
   }
 
+  /**
+   * Inicializa la Gui
+   * @param useKernel
+   * @param commands
+   * @param config
+   */
   public void init( Kernel useKernel , String commands , String config ) {
     kernel = useKernel ;
     kernel.setControlPanel( this );

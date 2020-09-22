@@ -1,4 +1,7 @@
 import java.util.*;
+/**
+ * Cuando hay error en la pagina 
+ */
 public class PageFault {
   public static void replacePage ( Vector mem , int virtPageNum , int replacePageNum , ControlPanel controlPanel ) 
   {
